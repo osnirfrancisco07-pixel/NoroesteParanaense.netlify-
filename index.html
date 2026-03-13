@@ -3,57 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noroeste Paranaense - Portal de Notícias</title>
+    <title>Noroeste do Paraná em Foco</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
-    <header style="background-color: #004a99; color: white; padding: 20px; text-align: center;">
+    <header>
         <h1>Noroeste Paranaense</h1>
         <p>Portal de notícias da região</p>
     </header>
 
-    <nav style="background-color: #f4f4f4; padding: 10px;">
-        <ul style="list-style: none; padding: 0;">
-            <li style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="#" style="text-decoration: none; color: #004a99; font-weight: bold;">Eventos</a></li>
-            <li style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="#" style="text-decoration: none; color: #004a99; font-weight: bold;">Notícias</a></li>
-            <li style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="#" style="text-decoration: none; color: #004a99; font-weight: bold;">Utilidade Pública</a></li>
-            <li style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="#" style="text-decoration: none; color: #004a99; font-weight: bold;">Vagas de Emprego</a></li>
-            <li style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="#" style="text-decoration: none; color: #004a99; font-weight: bold;">Serviços</a></li>
-            <li style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="#" style="text-decoration: none; color: #004a99; font-weight: bold;">Humor</a></li>
-            <li style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="#" style="text-decoration: none; color: #004a99; font-weight: bold;">Horóscopo</a></li>
-            <li style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="#" style="text-decoration: none; color: #004a99; font-weight: bold;">Resumo de Novelas</a></li>
-        </ul>
+    <nav>
+        <a href="#">Eventos</a>
+        <a href="#">Notícias</a>
+        <a href="#">Utilidade Pública</a>
+        <a href="#">Vagas de Emprego</a>
+        <a href="#">Serviços</a>
+        <a href="#">Humor</a>
+        <a href="#">Horóscopo</a>
+        <a href="#">Resumo de Novelas</a>
     </nav>
 
-    <main style="padding: 20px; text-align: center;">
+    <section class="publicidade">
         <h2>Publicidade</h2>
-        <div style="background-color: #eef4ff; padding: 40px; border: 1px dashed #004a99;">
+        <div class="banner">
             Seu anúncio aqui
         </div>
-    </main>
+    </section>
 
-    <footer style="background-color: #004a99; color: white; text-align: center; padding: 20px; margin-top: 20px;">
+    <section id="posts"></section>
+
+    <footer>
         <p>Siga nas redes sociais</p>
-        <div style="display: flex; justify-content: space-around;">
-            <a href="#" style="color: white; text-decoration: none;">WhatsApp</a>
-            <a href="#" style="color: white; text-decoration: none;">Facebook</a>
-            <a href="#" style="color: white; text-decoration: none;">Instagram</a>
+        <div class="redes">
+            <a href="https://wa.me/5544988329395" target="_blank">WhatsApp</a>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
         </div>
+        <p>© 2026 Noroeste Paranaense</p>
     </footer>
 
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
-
