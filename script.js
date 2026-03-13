@@ -1,53 +1,55 @@
-const cotacoes = { USD: 4.96, EUR: 5.38 };
+// Dados simulados para o Horóscopo
+const previsoes = {
+    "Áries": "O dia pede iniciativa no trabalho. Evite gastos impulsivos.",
+    "Touro": "Momento de estabilidade. Boa fase para conversas familiares.",
+    "Gêmeos": "Sua comunicação está em alta. Aproveite para fazer contatos.",
+    // Adicione os outros signos aqui...
+    "Peixes": "Confie na sua intuição para resolver problemas pendentes."
+};
 
-function toggleMenu() {
-    document.getElementById('nav-links').classList.toggle('show');
+function atualizarHoroscopo() {
+    const signo = document.getElementById('signoSelect').value;
+    const texto = previsoes[signo] || "Busque o equilíbrio em suas ações hoje.";
+    document.getElementById('horoscopo-texto').innerHTML = `<strong>${signo}:</strong> ${texto}`;
 }
 
-// BUSCA DE NOTÍCIAS
-async function fetchNoticias() {
+function configurarCalendario() {
+    const dataAtual = new Date();
+    const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    const dias = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    
+    document.getElementById('calendar-display').innerHTML = `
+        <div class="cal-header">${meses[dataAtual.getMonth()]}</div>
+        <div class="cal-date">${dataAtual.getDate()}</div>
+        <div class="cal-day">${dias[dataAtual.getDay()]}</div>
+    `;
+}
+
+async function carregarConteudo() {
     const grid = document.getElementById('news-grid');
-    try {
-        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/economia/');
-        const data = await res.json();
-        grid.innerHTML = data.items.slice(0, 3).map(item => `
-            <div class="news-card">
-                <div class="img-box"><img src="${item.thumbnail || 'posts/27317.jpg'}"></div>
-                <div class="news-body">
-                    <span class="tag">NOTÍCIA</span>
-                    <h4>${item.title}</h4>
-                    <a href="${item.link}" target="_blank" class="btn-link">Ver mais</a>
-                </div>
+    // Simulando Notícias e Esportes (Geralmente vem de APIs de RSS)
+    const noticias = [
+        { titulo: "Noroeste FC vence clássico regional", cat: "ESPORTE", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=400" },
+        { titulo: "Novas obras de asfalto começam na segunda", cat: "NOTÍCIA", img: "posts/27317.jpg" },
+        { titulo: "Previsão de chuva para o fim de semana", cat: "CLIMA", img: "https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=400" }
+    ];
+
+    grid.innerHTML = noticias.map(n => `
+        <div class="news-card">
+            <div class="img-box"><img src="${n.img}"></div>
+            <div class="news-body">
+                <span class="tag">${n.cat}</span>
+                <h4>${n.titulo}</h4>
+                <a href="#" class="btn-link">Ler notícia</a>
             </div>
-        `).join('');
-    } catch (e) { grid.innerHTML = "<p>Erro ao carregar notícias.</p>"; }
-}
-
-// CALCULADORA
-function convertCurrency() {
-    const valor = document.getElementById('inputValue').value;
-    const moeda = document.getElementById('currencySelect').value;
-    const taxa = cotacoes[moeda];
-    const display = document.getElementById('resultValue');
-    display.innerHTML = valor > 0 ? `Conversão: <strong>${moeda} ${(valor / taxa).toFixed(2)}</strong>` : "Resultado: $ 0,00";
-}
-
-// TICKER TV
-function initTicker() {
-    const container = document.getElementById('ticker-values');
-    const texto = "DÓLAR: R$ 4,96 • EURO: R$ 5,38 • SOJA: R$ 134,50 • MILHO: R$ 62,20 • BOI: R$ 232,00 • ";
-    container.innerHTML = `<span>${texto}</span><span>${texto}</span>`;
-}
-
-// MAPA DO CLIMA (Configurado para o Noroeste do PR)
-function initMap() {
-    const map = L.map('map').setView([-23.4, -51.9], 8); // Coordenadas médias da região
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-    L.marker([-23.4, -51.9]).addTo(map).bindPopup('Previsão para o Noroeste Paranaense').openPopup();
+        </div>
+    `).join('');
 }
 
 window.onload = () => {
-    fetchNoticias();
-    initTicker();
-    initMap();
+    initTicker();   // Função das cotações infinitas
+    initMap();      // Função do mapa
+    configurarCalendario();
+    carregarConteudo();
+    atualizarHoroscopo();
 };
