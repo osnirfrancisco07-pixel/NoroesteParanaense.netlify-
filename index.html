@@ -14,9 +14,11 @@
 
     <nav>
         <div class="menu-icon" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            <div class="bars-container">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
             <span class="txt-menu">MENU</span>
         </div>
         
@@ -38,45 +40,43 @@
         </section>
 
         <div class="noticias-grid">
-            
             <article class="noticia-destaque">
-                <img src="https://via.placeholder.com/800x450" alt="Imagem da notícia principal">
-                <div class="destaque-info">
+                <img src="posts/27317.jpg" alt="Notícia Principal"> <div class="destaque-info">
                     <span class="categoria">Região</span>
-                    <h1>Título da Notícia Principal em Destaque no Noroeste</h1>
-                    <p>Resumo da notícia importante que está acontecendo agora no Noroeste do Paraná para informar o leitor.</p>
+                    <h1>Título da Notícia Principal em Destaque</h1>
+                    <p>Resumo da notícia importante do Noroeste Paranaense.</p>
                 </div>
             </article>
 
             <aside class="noticias-laterais">
                 <article class="mini-card">
-                    <img src="https://via.placeholder.com/150x100" alt="Notícia 1">
+                    <img src="posts/27317.jpg" alt="Miniatura">
                     <h3>Vagas de emprego abertas para Maringá e região</h3>
                 </article>
                 <article class="mini-card">
-                    <img src="https://via.placeholder.com/150x100" alt="Notícia 2">
+                    <img src="posts/27317.jpg" alt="Miniatura">
                     <h3>Previsão do tempo: Calor segue forte no Noroeste</h3>
                 </article>
-                <article class="mini-card">
-                    <img src="https://via.placeholder.com/150x100" alt="Notícia 3">
-                    <h3>Programação de eventos para o final de semana</h3>
-                </article>
             </aside>
-
         </div>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="redes">
-                <a href="https://wa.me/5544988329395" target="_blank">WhatsApp</a>
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-            </div>
-            <p>&copy; 2026 Noroeste Paranaense - Todos os direitos reservados.</p>
+        <div class="redes">
+            <a href="https://wa.me/5544988329395" target="_blank">WhatsApp</a>
         </div>
+        <p>&copy; 2026 Noroeste Paranaense</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            } else {
+                navLinks.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
