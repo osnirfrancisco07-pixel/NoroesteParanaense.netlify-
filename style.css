@@ -1,50 +1,50 @@
 :root {
     --primaria: #004a8d;
-    --fundo: #eef2f7; /* O azul suave do plano de fundo */
+    --fundo: #eef2f7; /* O azul claro do fundo que você escolheu */
     --branco: #ffffff;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-body { background-color: var(--fundo); }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; scroll-behavior: smooth; }
 
-/* Header e Nav */
-.main-header { background: var(--branco); padding: 15px; text-align: center; }
+body { background-color: var(--fundo); color: #333; }
+
+/* Header e Nav conforme seu print */
+.main-header { background: var(--branco); padding: 15px; text-align: center; border-bottom: 1px solid #ddd; }
 .logo { width: 140px; }
-.main-nav { background: var(--primaria); position: sticky; top: 0; z-index: 1000; }
 
+.main-nav { background: var(--primaria); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .menu-container-mobile { display: flex; align-items: center; padding: 12px 20px; cursor: pointer; color: white; gap: 10px; }
 .hamburger span { display: block; width: 20px; height: 2px; background: white; margin: 4px 0; }
 .menu-label { font-weight: bold; font-size: 14px; }
 
 .nav-links { display: none; list-style: none; background: #003366; }
 .nav-links.show { display: flex; flex-direction: column; }
-.nav-links a { color: white; text-decoration: none; padding: 15px 25px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.nav-links i { margin-right: 8px; }
+.nav-links li a { color: white; text-decoration: none; padding: 15px 25px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 10px; }
 
-/* Grid de Informações Atuais */
+/* Seções de Informação */
 .content-wrapper { max-width: 1000px; margin: 0 auto; padding: 15px; }
-.hero-post { background: var(--branco); border-radius: 8px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+.hero-post { background: var(--branco); border-radius: 8px; overflow: hidden; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 .hero-post img { width: 100%; display: block; }
 .post-content { padding: 15px; }
 .badge { background: #d32f2f; color: white; padding: 3px 8px; font-size: 10px; font-weight: bold; border-radius: 3px; }
 
-.info-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-.info-card { background: var(--branco); padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-.info-card h3 { font-size: 16px; color: var(--primaria); margin-bottom: 10px; border-bottom: 2px solid var(--fundo); padding-bottom: 5px; }
-.item { font-size: 14px; margin-bottom: 8px; line-height: 1.4; }
+.info-section { margin-bottom: 40px; scroll-margin-top: 80px; }
+.section-title { font-size: 18px; color: var(--primaria); margin-bottom: 15px; border-left: 4px solid var(--primaria); padding-left: 10px; }
+.card-info { background: var(--branco); padding: 15px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.card-info h4 { font-size: 15px; color: #d32f2f; margin-bottom: 5px; }
+.card-info p { font-size: 14px; line-height: 1.5; }
 
-/* Rodapé (IGUAL AO PRINT) */
-.main-footer { background: #1a1a1a; color: white; padding: 30px 15px; text-align: center; }
-.social-highlight { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; align-items: center; }
+/* Rodapé Colorido */
+.main-footer { background: #1a1a1a; color: white; padding: 40px 15px; text-align: center; }
+.social-highlight { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; align-items: center; }
 .social-btn { text-decoration: none; color: white; padding: 12px; border-radius: 25px; width: 100%; max-width: 280px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
 .whatsapp { background: #25d366; }
 .facebook { background: #1877f2; }
 .instagram { background: #e1306c; }
 
-/* Desktop */
 @media (min-width: 769px) {
     .menu-container-mobile { display: none; }
     .nav-links { display: flex; justify-content: center; background: var(--primaria); }
-    .info-grid { grid-template-columns: 1fr 1fr; }
     .social-highlight { flex-direction: row; justify-content: center; }
 }
