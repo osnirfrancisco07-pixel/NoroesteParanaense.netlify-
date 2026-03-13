@@ -1,76 +1,63 @@
-:root { --azul: #004a8d; --fundo: #eef2f7; --branco: #ffffff; --verde: #2ecc71; }
+:root { --azul: #004a8d; --fundo: #f0f2f5; --branco: #ffffff; --verde: #2ecc71; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: var(--fundo); overflow-x: hidden; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-body { background-color: var(--fundo); }
-
-/* Cabeçalho */
-.main-header { background: #fff; padding: 10px; text-align: center; border-bottom: 1px solid #ddd; }
+/* Header e Nav */
+.main-header { background: var(--branco); padding: 12px; text-align: center; border-bottom: 2px solid #ddd; }
 .logo { height: 45px; }
+.main-nav { background: var(--azul); position: sticky; top: 0; z-index: 1000; }
+.nav-top { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; }
+.search-container { display: flex; background: #fff; border-radius: 4px; padding: 4px 10px; width: 180px; }
+.search-container input { border: none; outline: none; width: 100%; font-size: 12px; }
+.menu-toggle { color: #fff; font-size: 22px; cursor: pointer; }
 
-/* NAV E BUSCA */
-.main-nav { background: var(--azul); sticky: top; z-index: 1000; }
-.nav-container-top { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; }
-.search-box { display: flex; background: white; border-radius: 20px; padding: 5px 12px; width: 160px; }
-.search-box input { border: none; outline: none; width: 100%; font-size: 11px; }
+/* TICKER JORNALISMO TV */
+.ticker-tv { background: #000; color: var(--verde); height: 35px; display: flex; align-items: center; overflow: hidden; font-size: 11px; font-weight: bold; border-top: 1px solid #222; }
+.ticker-track { display: flex; white-space: nowrap; animation: scroll-tv 30s linear infinite; }
+.ticker-track span { padding-right: 60px; }
+@keyframes scroll-tv { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* O LETREIRO ESTILO JORNAL NACIONAL */
-.tv-ticker {
-    background: #111;
-    color: var(--verde);
-    height: 35px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    font-size: 12px;
-    font-weight: bold;
-    border-bottom: 2px solid var(--azul);
-}
-.ticker-content {
-    display: flex;
-    white-space: nowrap;
-    animation: marquee 30s linear infinite;
-}
-.ticker-content span {
-    padding-right: 50px;
-}
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+/* Layout Geral */
+.container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
+.content-section { margin-bottom: 40px; }
+.block-title { font-size: 18px; color: var(--azul); margin-bottom: 20px; border-left: 6px solid var(--azul); padding-left: 12px; text-transform: uppercase; }
 
-/* CARDS UNIFORMES E FOTOS */
-.content-wrapper { max-width: 1000px; margin: 15px auto; padding: 0 15px; }
-.uniform-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
+/* FORMATAÇÃO DOS CARDS E IMAGENS (Sempre Iguais) */
+.standard-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.news-card { background: var(--branco); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; }
 
-.uniform-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.img-box { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #ddd; }
+.img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-/* FOTOS DO MESMO TAMANHO */
-.news-thumb {
-    width: 100%;
-    height: 160px; /* Altura fixa para todas as imagens */
-    object-fit: cover; /* Não deixa a foto esticar */
-}
+.news-body { padding: 18px; flex-grow: 1; display: flex; flex-direction: column; }
+.tag { font-size: 9px; background: var(--azul); color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: bold; align-self: flex-start; margin-bottom: 12px; }
+.news-body h4 { font-size: 15px; line-height: 1.5; margin-bottom: 15px; flex-grow: 1; }
+.btn-link { color: var(--azul); text-decoration: none; font-weight: bold; font-size: 13px; border-top: 1px solid #f0f0f0; padding-top: 12px; }
 
-.news-info { padding: 12px; }
-.news-info h4 { font-size: 13px; line-height: 1.4; color: #333; margin-bottom: 8px; }
-.news-info a { font-size: 10px; font-weight: bold; text-decoration: none; color: var(--azul); }
+/* Agro e Moedas */
+.agro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.agro-card { background: var(--branco); padding: 15px; border-radius: 10px; text-align: center; border-bottom: 4px solid var(--verde); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.agro-card i { color: var(--verde); font-size: 20px; margin-bottom: 5px; display: block; }
+.agro-card strong { font-size: 14px; color: var(--azul); display: block; }
 
-/* Economia Layout */
-.market-container { display: flex; flex-direction: column; gap: 15px; }
-.market-main-card, .converter-card { background: #fff; padding: 15px; border-radius: 8px; }
-.result-box { background: #f0f7ff; padding: 10px; border-radius: 5px; text-align: center; margin-top: 10px; font-weight: bold; }
+.market-split { display: grid; grid-template-columns: 1fr; gap: 15px; }
+.card-white { background: var(--branco); padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+.currency-display { display: flex; justify-content: space-around; font-weight: bold; color: var(--azul); }
+.res-box { margin-top: 15px; padding: 15px; background: #eef7ff; border-radius: 8px; text-align: center; font-weight: bold; color: var(--azul); border: 1px dashed var(--azul); }
+input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 10px; }
 
-/* Menu Mobile */
+/* Mapa */
+#map { height: 350px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); z-index: 1; }
+
+/* Navegação Mobile e WhatsApp */
 .nav-links { display: none; list-style: none; background: #003366; }
 .nav-links.show { display: block; }
-.nav-links a { color: #fff; text-decoration: none; display: block; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.nav-links a { color: #fff; text-decoration: none; display: block; padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; font-weight: bold; }
+.wa-btn { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 9999; text-decoration: none; }
 
-/* Desktop */
 @media (min-width: 768px) {
-    .menu-container-mobile { display: none; }
+    .standard-grid { grid-template-columns: repeat(3, 1fr); }
     .nav-links { display: flex; justify-content: center; background: var(--azul); }
-    .uniform-grid { grid-template-columns: repeat(2, 1fr); }
-    .market-container { flex-direction: row; }
-    .market-main-card { flex: 2; } .converter-card { flex: 1; }
+    .nav-links a { border: none; padding: 18px 30px; }
+    .market-split { grid-template-columns: 1fr 1fr; }
 }
-
