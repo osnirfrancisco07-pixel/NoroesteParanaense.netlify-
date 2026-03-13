@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noroeste Paranaense | Portal Completo</title>
+    <title>Noroeste Paranaense | Portal de Notícias</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
@@ -16,14 +16,18 @@
 
     <nav class="main-nav">
         <div class="nav-top">
-            <button class="menu-toggle" id="btn-menu-mobile"><i class="fas fa-bars"></i> MENU</button>
+            <button class="menu-toggle" id="btn-menu-mobile">
+                <i class="fas fa-bars"></i> MENU
+            </button>
             <div class="search-container">
-                <input type="text" placeholder="Pesquisar notícias...">
+                <input type="text" placeholder="Pesquisar...">
                 <button><i class="fas fa-search"></i></button>
             </div>
         </div>
         
-        <div class="ticker-tv"><div class="ticker-track" id="ticker-values"></div></div>
+        <div class="ticker-tv">
+            <div class="ticker-track" id="ticker-values"></div>
+        </div>
 
         <ul class="nav-links" id="nav-links">
             <li><a href="#noticias">NOTÍCIAS</a></li>
@@ -38,7 +42,7 @@
         <section id="noticias" class="content-section">
             <h2 class="block-title">Plantão em Tempo Real</h2>
             <div id="rss-news-container" class="standard-grid">
-                <div class="loading">Buscando notícias atualizadas...</div>
+                <div class="loading">Sincronizando notícias da região...</div>
             </div>
         </section>
 
@@ -49,18 +53,18 @@
                     <h3 class="mini-title">Conversor de Exportação</h3>
                     <input type="number" id="valorInput" placeholder="Valor em R$">
                     <select id="moedaSelect">
-                        <option value="USD">Dólar (Comercial)</option>
-                        <option value="EUR">Euro</option>
+                        <option value="USD">Dólar (USD)</option>
+                        <option value="EUR">Euro (EUR)</option>
                     </select>
                     <button onclick="converterMoeda()" class="btn-calc">CALCULAR</button>
-                    <div id="resultadoCalc" class="res-box">Resultado aparecerá aqui...</div>
+                    <div id="resultadoCalc" class="res-box">Resultado: --</div>
                 </div>
                 <div class="card-white">
-                    <h3 class="mini-title">Cotações do Campo</h3>
-                    <ul class="lista-agro">
-                        <li><strong>Soja:</strong> R$ 134,50</li>
-                        <li><strong>Milho:</strong> R$ 62,20</li>
-                        <li><strong>Boi Gordo:</strong> R$ 232,00</li>
+                    <h3 class="mini-title">Cotações do Dia</h3>
+                    <ul class="agro-list">
+                        <li><strong>Soja (Saca):</strong> R$ 134,80</li>
+                        <li><strong>Milho (Saca):</strong> R$ 61,50</li>
+                        <li><strong>Boi Gordo (@):</strong> R$ 235,00</li>
                     </ul>
                 </div>
             </div>
@@ -68,25 +72,25 @@
 
         <section id="novelas" class="content-section">
             <h2 class="block-title">Resumo das Novelas</h2>
-            <div class="standard-grid" id="novelas-grid">
-                <div class="card-white">
+            <div class="standard-grid">
+                <article class="card-white">
                     <div class="img-box"><img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400"></div>
-                    <h4>Novela das 21h</h4>
-                    <p>Confira os principais acontecimentos do capítulo de hoje.</p>
-                </div>
-                <div class="card-white">
+                    <h4 class="title-margin">Novela das Nove</h4>
+                    <p class="text-small">Acompanhe as reviravoltas e o destino dos protagonistas no capítulo de hoje.</p>
+                </article>
+                <article class="card-white">
                     <div class="img-box"><img src="https://images.unsplash.com/photo-1598899131409-40539597bfc3?w=400"></div>
-                    <h4>Vale a Pena Ver de Novo</h4>
-                    <p>Grandes emoções marcam a semana da reprise.</p>
-                </div>
+                    <h4 class="title-margin">Vale a Pena Ver de Novo</h4>
+                    <p class="text-small">As emoções da tarde com o clássico que parou o Brasil.</p>
+                </article>
             </div>
         </section>
 
         <section id="horoscopo" class="content-section">
-            <h2 class="block-title">Horóscopo do Dia</h2>
+            <h2 class="block-title">Zodíaco</h2>
             <div class="card-white">
                 <select id="signoSelect" onchange="atualizarHoroscopo()" class="custom-select">
-                    <option value="">Escolha seu signo...</option>
+                    <option value="">Selecione seu signo...</option>
                     <option value="Áries">Áries</option><option value="Touro">Touro</option>
                     <option value="Gêmeos">Gêmeos</option><option value="Câncer">Câncer</option>
                     <option value="Leão">Leão</option><option value="Virgem">Virgem</option>
@@ -94,17 +98,17 @@
                     <option value="Sagitário">Sagitário</option><option value="Capricórnio">Capricórnio</option>
                     <option value="Aquário">Aquário</option><option value="Peixes">Peixes</option>
                 </select>
-                <div id="horoscopo-texto" class="res-box"></div>
+                <div id="horoscopo-texto" class="res-box">Sua previsão aparecerá aqui.</div>
             </div>
         </section>
 
         <section id="clima" class="content-section">
-            <h2 class="block-title">Clima e Probabilidade de Chuva</h2>
+            <h2 class="block-title">Previsão e Probabilidade de Chuva</h2>
             <div class="card-white">
                 <div id="relogio-digital" class="relogio"></div>
-                <div id="info-clima-painel">
-                    <span id="temp-atual">--°C</span> | 
-                    <i class="fas fa-umbrella"></i> Chuva: <span id="valor-chuva">0</span>%
+                <div class="clima-panel">
+                    <div class="clima-data"><i class="fas fa-temperature-high"></i> <span id="temp-atual">--°C</span></div>
+                    <div class="clima-data"><i class="fas fa-cloud-showers-heavy" style="color:#3498db;"></i> <span id="valor-chuva">0</span>% Chuva</div>
                 </div>
                 <div id="map"></div>
             </div>
@@ -113,12 +117,12 @@
 
     <footer class="main-footer">
         <div class="social-icons">
-            <a href="https://wa.me/5544988329395" class="wa"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://wa.me/5544988329395" target="_blank" class="wa"><i class="fab fa-whatsapp"></i></a>
             <a href="#" class="fb"><i class="fab fa-facebook"></i></a>
             <a href="#" class="ig"><i class="fab fa-instagram"></i></a>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Noroeste Paranaense | Informação com Credibilidade</p>
+            <p>© 2026 Noroeste Paranaense | Credibilidade e Informação</p>
         </div>
     </footer>
 
