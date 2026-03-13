@@ -15,103 +15,108 @@
     </header>
 
     <nav class="main-nav">
-        <div class="nav-container-top">
-            <div class="menu-container-mobile" onclick="toggleMenu()">
-                <div class="hamburger"><span></span><span></span><span></span></div>
-                <span class="menu-label">MENU</span>
-            </div>
-            <div class="search-box">
+        <div class="nav-top">
+            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+            <div class="search-container">
                 <input type="text" placeholder="Pesquisar...">
                 <button><i class="fas fa-search"></i></button>
             </div>
         </div>
         
-        <div class="tv-ticker">
-            <div class="ticker-content" id="ticker-values">
-                </div>
+        <div class="ticker-tv">
+            <div class="ticker-track" id="ticker-values"></div>
         </div>
 
         <ul class="nav-links" id="nav-links">
-            <li><a href="#noticias" onclick="toggleMenu()">Notícias</a></li>
-            <li><a href="#economia" onclick="toggleMenu()">Economia</a></li>
-            <li><a href="#agro" onclick="toggleMenu()">Agro</a></li>
-            <li><a href="#clima" onclick="toggleMenu()">Clima</a></li>
+            <li><a href="#noticias">NOTÍCIAS</a></li>
+            <li><a href="#agro">AGRO</a></li>
+            <li><a href="#economia">CÂMBIO</a></li>
+            <li><a href="#entretenimento">NOVELAS</a></li>
+            <li><a href="#mapa-clima">CLIMA</a></li>
         </ul>
     </nav>
 
-    <main class="content-wrapper">
+    <main class="container">
         
-        <section id="noticias" class="info-block">
-            <h3 class="title-section"><i class="fas fa-bolt"></i> Últimas Notícias</h3>
-            <div id="news-container" class="uniform-grid">
-                <p>Carregando notícias...</p>
+        <section id="agro" class="content-section">
+            <h2 class="block-title">Cotações do Campo</h2>
+            <div class="agro-grid">
+                <div class="agro-card">
+                    <i class="fas fa-seedling"></i>
+                    <span>SOJA (Saca)</span>
+                    <strong>R$ 134,50</strong>
+                </div>
+                <div class="agro-card">
+                    <i class="fas fa-wheat-awn"></i>
+                    <span>MILHO (Saca)</span>
+                    <strong>R$ 62,20</strong>
+                </div>
+                <div class="agro-card">
+                    <i class="fas fa-cow"></i>
+                    <span>BOI GORDO (@)</span>
+                    <strong>R$ 232,00</strong>
+                </div>
             </div>
         </section>
 
-        <section id="economia" class="info-block">
-            <div class="market-container">
-                <div class="market-main-card">
-                    <canvas id="ibovChart"></canvas>
+        <section id="noticias" class="content-section">
+            <h2 class="block-title">Destaques do Dia</h2>
+            <div id="news-grid" class="standard-grid"></div>
+        </section>
+
+        <section id="economia" class="content-section">
+            <h2 class="block-title">Calculadora de Câmbio</h2>
+            <div class="market-split">
+                <div class="card-white currency-display">
+                    <div>USD: <strong id="usd-val">R$ 4,96</strong></div>
+                    <div>EUR: <strong id="eur-val">R$ 5,38</strong></div>
                 </div>
-                <div class="converter-card">
-                    <h4>Conversor</h4>
-                    <input type="number" id="inputValue" placeholder="Valor R$" oninput="convertCurrency()">
-                    <select id="currencySelect" onchange="convertCurrency()">
-                        <option value="4.96">Dólar (USD)</option>
-                        <option value="5.38">Euro (EUR)</option>
-                    </select>
-                    <div id="resultValue" class="result-box">Resultado: $ 0,00</div>
+                <div class="card-white">
+                    <div class="calc-group">
+                        <input type="number" id="inputValue" placeholder="Valor em R$" oninput="convertCurrency()">
+                        <select id="currencySelect" onchange="convertCurrency()">
+                            <option value="USD">Dólar (USD)</option>
+                            <option value="EUR">Euro (EUR)</option>
+                        </select>
+                    </div>
+                    <div id="resultValue" class="res-box">Resultado: $ 0,00</div>
                 </div>
             </div>
+        </section>
+
+        <section id="entretenimento" class="content-section">
+            <h2 class="block-title">Entretenimento</h2>
+            <div class="standard-grid">
+                <div class="news-card">
+                    <div class="img-box"><img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=500"></div>
+                    <div class="news-body">
+                        <span class="tag">RESUMO</span>
+                        <h4>Novelas: Veja o que acontece nos próximos capítulos</h4>
+                        <a href="#" class="btn-link">Ler resumos</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="img-box"><img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=500"></div>
+                    <div class="news-body">
+                        <span class="tag" style="background:#e67e22">AGENDA</span>
+                        <h4>Eventos: Programação cultural para o Noroeste</h4>
+                        <a href="#" class="btn-link">Ver locais</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mapa-clima" class="content-section">
+            <h2 class="block-title">Previsão e Satélite</h2>
+            <div id="map"></div>
         </section>
 
     </main>
 
-    <a href="https://wa.me/5544988329395" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/5544988329395" class="wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        function toggleMenu() { document.getElementById('nav-links').classList.toggle('show'); }
-
-        // Notícias Automáticas
-        async function fetchNews() {
-            const container = document.getElementById('news-container');
-            const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/economia/';
-            try {
-                const response = await fetch(rssUrl);
-                const data = await response.json();
-                container.innerHTML = data.items.slice(0, 4).map(item => `
-                    <div class="auto-news-card uniform-card">
-                        <img src="${item.thumbnail || 'posts/27317.jpg'}" class="news-thumb">
-                        <div class="news-info">
-                            <h4>${item.title}</h4>
-                            <a href="${item.link}" target="_blank">Ver mais</a>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (e) { container.innerHTML = "<p>Erro ao carregar notícias.</p>"; }
-        }
-
-        // Ticker de TV
-        const ticker = document.getElementById('ticker-values');
-        const infoAgro = ["DÓLAR: R$ 4,96", "SOJA: R$ 134,50", "MILHO: R$ 62,20", "IBOVESPA: +0.42%", "BOI: R$ 232,00"];
-        // Duplicamos para o efeito infinito
-        const textoTicker = infoAgro.join(' • ') + ' • ';
-        ticker.innerHTML = `<span>${textoTicker}</span><span>${textoTicker}</span>`;
-
-        // Gráfico
-        new Chart(document.getElementById('ibovChart'), {
-            type: 'line',
-            data: {
-                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
-                datasets: [{ label: 'Ibov', data: [126, 127, 126, 128, 128.4], borderColor: '#2ecc71', fill: false }]
-            },
-            options: { maintainAspectRatio: false }
-        });
-
-        window.onload = fetchNews;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
 
