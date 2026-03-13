@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noroeste Paranaense | Portal</title>
+    <title>Noroeste Paranaense | Portal Completo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
@@ -11,67 +11,101 @@
 <body>
 
     <header class="main-header">
-        <img src="posts/27317.jpg" alt="Logo" class="logo">
+        <img src="posts/27317.jpg" alt="Logo Noroeste Paranaense" class="logo">
     </header>
 
     <nav class="main-nav">
         <div class="nav-top">
-            <div class="menu-toggle" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i> MENU
-            </div>
+            <button class="menu-toggle" id="btn-menu-mobile"><i class="fas fa-bars"></i> MENU</button>
             <div class="search-container">
-                <input type="text" placeholder="Pesquisar...">
+                <input type="text" placeholder="Pesquisar notícias...">
                 <button><i class="fas fa-search"></i></button>
             </div>
         </div>
         
-        <div class="ticker-tv">
-            <div class="ticker-track" id="ticker-values"></div>
-        </div>
+        <div class="ticker-tv"><div class="ticker-track" id="ticker-values"></div></div>
 
         <ul class="nav-links" id="nav-links">
             <li><a href="#noticias">NOTÍCIAS</a></li>
-            <li><a href="#agro">AGRONEGÓCIO</a></li>
+            <li><a href="#agro">AGRO</a></li>
             <li><a href="#novelas">NOVELAS</a></li>
             <li><a href="#horoscopo">HORÓSCOPO</a></li>
-            <li><a href="#clima">PREVISÃO DO TEMPO</a></li>
-            <li><a href="https://wa.me/5544988329395" target="_blank">ANUNCIE CONOSCO</a></li>
+            <li><a href="#clima">CLIMA</a></li>
         </ul>
     </nav>
 
     <main class="container">
         <section id="noticias" class="content-section">
-            <h2 class="block-title">Notícias</h2>
-            <div id="news-grid" class="standard-grid"></div>
+            <h2 class="block-title">Plantão em Tempo Real</h2>
+            <div id="rss-news-container" class="standard-grid">
+                <div class="loading">Buscando notícias atualizadas...</div>
+            </div>
         </section>
 
-        <div class="market-split">
-            <section id="agro" class="card-white">
-                <h3 class="mini-title">Conversor de Moedas</h3>
-                <input type="number" id="valorInput" placeholder="Valor em R$">
-                <select id="moedaSelect">
-                    <option value="USD">Dólar (USD)</option>
-                    <option value="EUR">Euro (EUR)</option>
-                </select>
-                <button onclick="converterMoeda()" class="btn-calc">CONVERTER</button>
-                <div id="resultadoCalc" class="res-box">Resultado: --</div>
-            </section>
+        <section id="agro" class="content-section">
+            <h2 class="block-title">Agronegócio</h2>
+            <div class="market-split">
+                <div class="card-white">
+                    <h3 class="mini-title">Conversor de Exportação</h3>
+                    <input type="number" id="valorInput" placeholder="Valor em R$">
+                    <select id="moedaSelect">
+                        <option value="USD">Dólar (Comercial)</option>
+                        <option value="EUR">Euro</option>
+                    </select>
+                    <button onclick="converterMoeda()" class="btn-calc">CALCULAR</button>
+                    <div id="resultadoCalc" class="res-box">Resultado aparecerá aqui...</div>
+                </div>
+                <div class="card-white">
+                    <h3 class="mini-title">Cotações do Campo</h3>
+                    <ul class="lista-agro">
+                        <li><strong>Soja:</strong> R$ 134,50</li>
+                        <li><strong>Milho:</strong> R$ 62,20</li>
+                        <li><strong>Boi Gordo:</strong> R$ 232,00</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-            <section id="horoscopo" class="card-white">
-                <h3 class="mini-title">Horóscopo</h3>
-                <select id="signoSelect" onchange="atualizarHoroscopo()" style="width:100%; padding:8px;">
-                    <option value="Áries">Áries</option>
-                    <option value="Touro">Touro</option>
-                    <option value="Gêmeos">Gêmeos</option>
+        <section id="novelas" class="content-section">
+            <h2 class="block-title">Resumo das Novelas</h2>
+            <div class="standard-grid" id="novelas-grid">
+                <div class="card-white">
+                    <div class="img-box"><img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400"></div>
+                    <h4>Novela das 21h</h4>
+                    <p>Confira os principais acontecimentos do capítulo de hoje.</p>
+                </div>
+                <div class="card-white">
+                    <div class="img-box"><img src="https://images.unsplash.com/photo-1598899131409-40539597bfc3?w=400"></div>
+                    <h4>Vale a Pena Ver de Novo</h4>
+                    <p>Grandes emoções marcam a semana da reprise.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="horoscopo" class="content-section">
+            <h2 class="block-title">Horóscopo do Dia</h2>
+            <div class="card-white">
+                <select id="signoSelect" onchange="atualizarHoroscopo()" class="custom-select">
+                    <option value="">Escolha seu signo...</option>
+                    <option value="Áries">Áries</option><option value="Touro">Touro</option>
+                    <option value="Gêmeos">Gêmeos</option><option value="Câncer">Câncer</option>
+                    <option value="Leão">Leão</option><option value="Virgem">Virgem</option>
+                    <option value="Libra">Libra</option><option value="Escorpião">Escorpião</option>
+                    <option value="Sagitário">Sagitário</option><option value="Capricórnio">Capricórnio</option>
+                    <option value="Aquário">Aquário</option><option value="Peixes">Peixes</option>
                 </select>
-                <div id="horoscopo-texto" class="res-box">Sua previsão aqui...</div>
-            </section>
-        </div>
+                <div id="horoscopo-texto" class="res-box"></div>
+            </div>
+        </section>
 
         <section id="clima" class="content-section">
-            <h2 class="block-title">Clima e Satélite</h2>
+            <h2 class="block-title">Clima e Probabilidade de Chuva</h2>
             <div class="card-white">
                 <div id="relogio-digital" class="relogio"></div>
+                <div id="info-clima-painel">
+                    <span id="temp-atual">--°C</span> | 
+                    <i class="fas fa-umbrella"></i> Chuva: <span id="valor-chuva">0</span>%
+                </div>
                 <div id="map"></div>
             </div>
         </section>
@@ -79,12 +113,12 @@
 
     <footer class="main-footer">
         <div class="social-icons">
-            <a href="https://wa.me/5544988329395" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/5544988329395" class="wa"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="fb"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="ig"><i class="fab fa-instagram"></i></a>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Noroeste Paranaense | Desenvolvido por [Seu Nome/Empresa]</p>
+            <p>© 2026 Noroeste Paranaense | Informação com Credibilidade</p>
         </div>
     </footer>
 
@@ -92,4 +126,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
