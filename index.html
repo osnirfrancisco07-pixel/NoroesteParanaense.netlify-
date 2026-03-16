@@ -10,213 +10,236 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
-        :root {
-            --azul: #003366;
-            --branco: #ffffff;
-            --preto: #0e0e0e;
-            --cinza-fundo: #f2f4f7;
-        }
-
-        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; }
+        :root { --azul: #003366; --branco: #ffffff; --preto: #0e0e0e; --cinza-fundo: #f2f4f7; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
         body { background: var(--cinza-fundo); color: #333; overflow-x: hidden; }
 
-        /* HEADER */
-        header { 
-            background: var(--azul); 
-            color: white; 
-            padding: 15px 0; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-        .logo h1 { font-size: 20px; text-transform: uppercase; letter-spacing: 1px; line-height: 1; }
+        header { background: var(--azul); color: white; padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo h1 { font-size: 20px; text-transform: uppercase; letter-spacing: 1px; line-height: 1; text-align: center; }
         .logo span { font-size: 9px; display: block; font-weight: 300; letter-spacing: 3px; margin-top: 2px; }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links a { color: white; text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; }
 
-        /* MENU DESKTOP */
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: white; text-decoration: none; font-size: 13px; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a:hover { color: #25d366; }
+        /* TICKER MOEDAS */
+        .ticker { background: #000; height: 35px; display: flex; align-items: center; overflow: hidden; border-bottom: 2px solid var(--azul); }
+        .ticker-move { white-space: nowrap; animation: moveTicker 40s linear infinite; font-size: 11px; font-weight: bold; display: flex; }
+        .ticker-item { display: inline-block; margin-right: 40px; color: #fff; }
+        .ticker-item b { color: #4ade80; margin-left: 5px; }
 
-        /* MENU MOBILE */
-        .menu-toggle { display: none; cursor: pointer; color: white; }
-        .mobile-sidebar {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 280px;
-            height: 100%;
-            background: var(--azul);
-            z-index: 2000;
-            transition: 0.4s ease;
-            padding: 40px 20px;
-        }
-        .mobile-sidebar.active { left: 0; }
-        .mobile-sidebar a { display: block; color: white; text-decoration: none; font-size: 18px; margin-bottom: 25px; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        .close-sidebar { position: absolute; top: 15px; right: 20px; color: white; cursor: pointer; }
+        /* PUBLICIDADE */
+        .pub-space { max-width: 1200px; margin: 20px auto; background: #ddd; height: 90px; display: flex; align-items: center; justify-content: center; border: 1px dashed #999; border-radius: 5px; color: #666; font-size: 12px; text-transform: uppercase; }
 
-        /* RESPONSIVIDADE MENU */
-        @media (max-width: 850px) {
-            .nav-links { display: none; }
-            .menu-toggle { display: block; }
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-title { border-left: 4px solid var(--azul); padding-left: 10px; color: var(--azul); margin: 30px 0 15px; text-transform: uppercase; font-size: 16px; font-weight: bold; }
 
-        /* TICKER */
-        .ticker { background: #e0e0e0; height: 35px; display: flex; align-items: center; overflow: hidden; border-bottom: 1px solid #ccc; }
-        .ticker-move { white-space: nowrap; animation: moveTicker 30s linear infinite; font-size: 12px; font-weight: bold; color: var(--azul); }
-        .ticker-item { display: inline-block; margin-right: 40px; }
+        /* BUSCA GERAL */
+        .search-area { position: relative; margin-bottom: 20px; }
+        .search-area input { width: 100%; padding: 12px 45px; border: 1px solid #ccc; border-radius: 5px; outline: none; }
+        .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--azul); }
+
+        /* NOTÍCIAS */
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-bottom: 3px solid var(--azul); }
+        .card img { width: 100%; height: 180px; object-fit: cover; }
+        .card-body { padding: 15px; }
+        .card-body h3 { font-size: 14px; color: var(--azul); line-height: 1.3; }
+
+        /* SIGNOS */
+        .horoscopo-grid { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; }
+        .signo-card { min-width: 120px; background: white; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #ddd; flex-shrink: 0; }
+        .signo-card i { color: var(--azul); margin-bottom: 5px; }
+
+        /* PIADAS E MEMES */
+        .fun-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .fun-card { background: #fffbe6; padding: 20px; border-radius: 10px; border: 1px solid #ffe58f; }
+
+        /* MAPA E BUSCA NO MAPA */
+        .map-box { background: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .map-search { display: flex; gap: 5px; margin-bottom: 10px; }
+        .map-search input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .map-search button { background: var(--azul); color: white; border: none; padding: 0 15px; border-radius: 5px; cursor: pointer; }
+        #map { height: 400px; width: 100%; border-radius: 5px; z-index: 1; }
+
+        /* AGRO */
+        .agro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background: white; padding: 20px; border-radius: 8px; }
+
+        footer { background: var(--preto); color: white; padding: 30px 20px; text-align: center; margin-top: 40px; }
+        .wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+
         @keyframes moveTicker { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
-
-        /* BUSCA */
-        .search-area { max-width: 1200px; margin: 25px auto; padding: 0 20px; }
-        .search-box { position: relative; }
-        .search-box input { 
-            width: 100%; padding: 14px 14px 14px 50px; 
-            border: 2px solid var(--azul); border-radius: 30px; 
-            font-size: 16px; outline: none;
-        }
-        .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--azul); }
-
-        /* CONTEÚDO */
-        .main-content { max-width: 1200px; margin: 0 auto; padding: 0 20px 40px; }
-        .section-title { border-left: 5px solid var(--azul); padding-left: 15px; color: var(--azul); margin-bottom: 25px; text-transform: uppercase; }
-        
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .news-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .news-card img { width: 100%; height: 180px; object-fit: cover; }
-        .news-card-body { padding: 15px; }
-        .news-card-body h3 { font-size: 16px; margin-bottom: 10px; color: var(--azul); line-height: 1.3; }
-
-        /* RODAPÉ LIMPO */
-        footer { background: var(--preto); color: white; padding: 40px 20px; text-align: center; }
-        .footer-socials { display: flex; justify-content: center; gap: 25px; margin-bottom: 15px; }
-        .footer-socials a { color: white; transition: 0.3s; }
-        .footer-socials a:hover { color: #25d366; }
-        .copy { font-size: 12px; opacity: 0.6; }
-
-        /* WHATSAPP FLUTUANTE */
-        .wa-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; transition: 0.3s; }
-        .wa-float:hover { transform: scale(1.1); }
+        @media (max-width: 768px) { .nav-links { display: none; } .agro-grid, .fun-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
-    <div class="mobile-sidebar" id="sidebar">
-        <div class="close-sidebar" onclick="toggleMenu()"><i data-lucide="x"></i></div>
-        <a href="#" onclick="toggleMenu()">Notícias</a>
-        <a href="#" onclick="toggleMenu()">Agronegócio</a>
-        <a href="#" onclick="toggleMenu()">Resumo Novelas</a>
-        <a href="#" onclick="toggleMenu()">Horóscopo</a>
-        <a href="#" onclick="toggleMenu()">Cotações</a>
-    </div>
 
     <header>
         <div class="header-container">
             <div class="logo">
                 <h1>NOROESTE <span>PARANAENSE</span></h1>
             </div>
-            
             <nav class="nav-links">
                 <a href="#">Notícias</a>
-                <a href="#">Agronegócio</a>
-                <a href="#">Resumo Novelas</a>
-                <a href="#">Horóscopo</a>
-                <a href="#">Cotações</a>
+                <a href="#">Agro</a>
+                <a href="#">Signos</a>
+                <a href="#">Piadas</a>
+                <a href="#">Clima</a>
             </nav>
-
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <i data-lucide="menu"></i>
-            </div>
         </div>
     </header>
 
     <div class="ticker">
         <div class="ticker-move">
-            <span class="ticker-item">SOJA: R$ 134,80</span>
-            <span class="ticker-item">MILHO: R$ 61,50</span>
-            <span class="ticker-item">DÓLAR: R$ 5,33</span>
-            <span class="ticker-item">EURO: R$ 6,03</span>
-            <span class="ticker-item">BOI GORDO: R$ 235,00</span>
+            <span class="ticker-item">DÓLAR:<b>R$ 5,12</b></span>
+            <span class="ticker-item">EURO:<b>R$ 5,54</b></span>
+            <span class="ticker-item">LIBRA:<b>R$ 6,48</b></span>
+            <span class="ticker-item">BITCOIN:<b>R$ 382.150</b></span>
+            <span class="ticker-item">IENE:<b>R$ 0,034</b></span>
+            <span class="ticker-item">DÓLAR CANADENSE:<b>R$ 3,75</b></span>
         </div>
     </div>
 
-    <div class="search-area">
-        <div class="search-box">
+    <div class="pub-space">Espaço para Publicidade (Banner Topo 970x90)</div>
+
+    <main class="container">
+        
+        <div class="search-area">
             <i data-lucide="search" class="search-icon"></i>
-            <input type="text" id="mainSearch" placeholder="Pesquisar notícias locais..." onkeyup="searchFunction()">
+            <input type="text" id="newsInput" placeholder="Pesquisar notícias no portal..." onkeyup="filterNews()">
         </div>
-    </div>
 
-    <main class="main-content">
-        <h2 class="section-title">Destaques da Região</h2>
         <div class="news-grid" id="newsGrid">
+            <div class="card">
+                <img src="https://picsum.photos/400/250?sig=10">
+                <div class="card-body">
+                    <h3>Picape de 1954: Relíquia paranaense é destaque na região</h3>
+                    <small>CIDADES | Há 2 horas</small>
+                </div>
             </div>
+            <div class="card">
+                <img src="https://picsum.photos/400/250?sig=11">
+                <div class="card-body">
+                    <h3>Ambulância e Trem: Acidente mobiliza socorro no Noroeste</h3>
+                    <small>POLICIAL | Há 4 horas</small>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/400/250?sig=12">
+                <div class="card-body">
+                    <h3>Inovações no Campo: Safra de 2026 promete números recordes</h3>
+                    <small>AGRO | Há 5 horas</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="pub-space">Anuncie aqui sua empresa (Banner Meio 728x90)</div>
+
+        <h2 class="section-title">Horóscopo</h2>
+        <div class="horoscopo-grid" id="signosGrid">
+            </div>
+
+        <h2 class="section-title">Agronegócio</h2>
+        <div class="agro-grid">
+            <div class="agro-box">
+                <strong>Conversor de Exportação</strong><br><br>
+                R$: <input type="number" id="agroIn" placeholder="0,00" style="width: 80px;">
+                <button onclick="calcAgro()" style="padding: 5px;">Converter</button>
+                <p id="agroRes" style="margin-top:10px; font-weight:bold; color:var(--azul)"></p>
+            </div>
+            <div class="agro-box">
+                <strong>Cotações Agro</strong><br>
+                Soja: R$ 134,80 | Milho: R$ 61,50 | Boi: R$ 235,00
+            </div>
+        </div>
+
+        <h2 class="section-title">Piadas e Memes</h2>
+        <div class="fun-grid">
+            <div class="fun-card">
+                <strong>Piada do Dia:</strong>
+                <p id="piada">Carregando diversão...</p>
+            </div>
+            <div class="fun-card" style="display:flex; align-items:center; justify-content:center; background:#eee;">
+                <span>[ Espaço para Meme/Imagem ]</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Mapa e Clima Regional</h2>
+        <div class="map-box">
+            <div class="map-search">
+                <input type="text" id="mapInput" placeholder="Buscar cidade ou rua no Noroeste...">
+                <button onclick="searchMap()">BUSCAR NO MAPA</button>
+            </div>
+            <div id="map"></div>
+        </div>
+
     </main>
 
     <footer>
         <div class="footer-socials">
-            <a href="#"><i data-lucide="facebook"></i></a>
-            <a href="#"><i data-lucide="instagram"></i></a>
+            <i data-lucide="facebook"></i>
+            <i data-lucide="instagram"></i>
         </div>
-        <div class="copy">
-            <p>© 2026 Noroeste Paranaense Notícias</p>
-            <p>Todos os direitos reservados.</p>
-        </div>
+        <p>© 2026 Noroeste Paranaense | Portal de Notícias</p>
     </footer>
 
     <a href="https://wa.me/554488329395" class="wa-float" target="_blank">
-        <i data-lucide="message-circle" style="width: 32px; height: 32px;"></i>
+        <i data-lucide="message-circle"></i>
     </a>
 
     <script>
         lucide.createIcons();
 
-        // CONTROLE DO MENU MOBILE
-        function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
+        // 1. Mapa Integrado
+        var map = L.map('map').setView([-23.42, -51.93], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        var marker = L.marker([-23.42, -51.93]).addTo(map).bindPopup('Noroeste Paranaense');
+
+        async function searchMap() {
+            const local = document.getElementById('mapInput').value;
+            if(!local) return;
+            const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${local}`);
+            const data = await res.json();
+            if(data.length > 0) {
+                const lat = data[0].lat;
+                const lon = data[0].lon;
+                map.setView([lat, lon], 14);
+                if(marker) map.removeLayer(marker);
+                marker = L.marker([lat, lon]).addTo(map).bindPopup(local).openPopup();
+            } else { alert("Local não encontrado!"); }
         }
 
-        // CARREGAMENTO DE NOTÍCIAS
-        function initNews() {
-            const grid = document.getElementById('newsGrid');
-            const fakeData = [
-                { t: "Paranaense guarda picape de 1954 que marcou seu nascimento", i: "https://picsum.photos/400/250?sig=1" },
-                { t: "Vídeo: ambulância é arrastada por trem e deixa feridos no PR", i: "https://picsum.photos/400/250?sig=2" },
-                { t: "Criança baleada acidentalmente em briga de família no Noroeste", i: "https://picsum.photos/400/250?sig=3" }
-            ];
+        // 2. Signos
+        const signos = ["Áries", "Touro", "Gêmeos", "Câncer", "Leão", "Virgem", "Libra", "Escorpião", "Sagitário", "Capricórnio", "Aquário", "Peixes"];
+        const sg = document.getElementById('signosGrid');
+        sg.innerHTML = signos.map(s => `
+            <div class="signo-card">
+                <i data-lucide="star"></i>
+                <p><strong>${s}</strong></p>
+                <small style="font-size:10px">Ver previsão</small>
+            </div>
+        `).join('');
+        lucide.createIcons();
 
-            grid.innerHTML = fakeData.map(n => `
-                <div class="news-card">
-                    <img src="${n.i}">
-                    <div class="news-card-body">
-                        <h3>${n.t}</h3>
-                        <p style="font-size: 13px; color: #777;">Fique por dentro dos detalhes desta notícia que impacta nossa região.</p>
-                    </div>
-                </div>
-            `).join('');
-        }
+        // 3. Piadas
+        const piadas = [
+            "Por que o livro de matemática se suicidou? Porque tinha muitos problemas.",
+            "O que o zero disse para o oito? Belo cinto!",
+            "Por que o jacaré tirou o filho da escola? Porque ele 'ré-ptil'."
+        ];
+        document.getElementById('piada').innerText = piadas[Math.floor(Math.random()*piadas.length)];
 
-        // FUNÇÃO DE BUSCA
-        function searchFunction() {
-            const query = document.getElementById('mainSearch').value.toLowerCase();
-            const cards = document.querySelectorAll('.news-card');
-            
-            cards.forEach(card => {
-                const title = card.querySelector('h3').innerText.toLowerCase();
-                card.style.display = title.includes(query) ? "block" : "none";
+        // 4. Funções de Busca e Agro
+        function filterNews() {
+            let val = document.getElementById('newsInput').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(c => {
+                c.style.display = c.innerText.toLowerCase().includes(val) ? "block" : "none";
             });
         }
 
-        window.onload = initNews;
+        function calcAgro() {
+            let v = document.getElementById('agroIn').value;
+            if(v) document.getElementById('agroRes').innerText = `Exportação Est.: US$ ${(v/5.12).toFixed(2)}`;
+        }
     </script>
 </body>
 </html>
