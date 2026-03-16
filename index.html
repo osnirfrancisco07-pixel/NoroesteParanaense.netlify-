@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>OmniNews | Portal Global</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --p: #2563eb; --bg: #ffffff; --txt: #0f172a; }
+        [data-theme="dark"] { --bg: #0f172a; --txt: #f8fafc; }
+        body { background: var(--bg); color: var(--txt); transition: 0.3s; font-family: sans-serif; }
+        .glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body>
+    <nav class="sticky top-0 z-50 p-4 border-b flex justify-between items-center glass">
+        <h1 class="text-2xl font-bold text-blue-600">OMNINEWS</h1>
+        <div class="flex gap-4">
+            <button onclick="document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')">🌓</button>
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold">Assinar</button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6">
+        <div id="news-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            </div>
+    </main>
+
+    <script>
+        const API_URL = "http://localhost:3000/api/news";
+
+        async function loadNews() {
+            try {
+                // Em produção, descomente a linha abaixo:
+                // const response = await fetch(API_URL);
+                // const data = await response.json();
+                
+                // Mock de dados para teste imediato:
+                const mock = [
+                    { title: "IA de 2026 supera expectativas", cat: "Tech", img: "https://picsum.photos/400/250?1" },
+                    { title: "Mercado Global em Alta", cat: "Finanças", img: "https://picsum.photos/400/250?2" }
+                ];
+
+                document.getElementById('news-grid').innerHTML = mock.map(n => `
+                    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                        <img src="${n.img}" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs font-bold text-blue-500 uppercase">${n.cat}</span>
+                            <h2 class="text-xl font-bold mt-2">${n.title}</h2>
+                            <button class="mt-4 text-blue-600 font-semibold">Ler mais →</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) { console.error("Erro ao carregar notícias"); }
+        }
+        window.onload = loadNews;
+    </script>
+</body>
+</html>
