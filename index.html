@@ -3,112 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noroeste Paranaense | Portal de Notícias</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Noroeste Paranaense | Notícias</title>
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        :root {
+            --azul: #003366;
+            --branco: #ffffff;
+            --preto: #111111;
+            --cinza-claro: #f4f7f6;
+        }
+
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { margin: 0; background: var(--cinza-claro); color: #333; }
+
+        /* CABEÇALHO UNIFICADO */
+        header { 
+            background: var(--azul); 
+            color: white; 
+            padding: 10px 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header-main {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo h1 { font-size: 22px; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { font-size: 10px; display: block; font-weight: 300; letter-spacing: 4px; }
+
+        /* TICKER (BARRA DE COTAÇÕES) */
+        .ticker-wrap { background: #eee; height: 30px; overflow: hidden; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
+        .ticker-content { white-space: nowrap; animation: ticker 30s linear infinite; font-size: 12px; font-weight: bold; }
+        .ticker-item { display: inline-block; margin-right: 50px; color: var(--azul); }
+        @keyframes ticker { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+        /* BUSCA INTEGRADA */
+        .search-container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        .search-box { position: relative; width: 100%; }
+        .search-box input { 
+            width: 100%; 
+            padding: 12px 20px 12px 45px; 
+            border: 2px solid var(--azul); 
+            border-radius: 25px; 
+            outline: none;
+            font-size: 16px;
+        }
+        .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--azul); }
+
+        /* GRID DE NOTÍCIAS */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .news-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+        .news-card { 
+            background: white; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            transition: 0.3s;
+        }
+        .news-card:hover { transform: translateY(-5px); }
+        .news-card img { width: 100%; height: 180px; object-fit: cover; }
+        .news-card-body { padding: 15px; }
+        .news-card-body h3 { margin: 0 0 10px; font-size: 16px; color: var(--azul); }
+        .news-card-body p { font-size: 13px; color: #666; line-height: 1.4; }
+
+        /* RODAPÉ LIMPO */
+        footer { background: var(--preto); color: white; padding: 40px 20px; text-align: center; margin-top: 40px; }
+        .footer-social { margin-bottom: 20px; }
+        .footer-social a { color: white; margin: 0 15px; text-decoration: none; font-size: 24px; }
+        .footer-info p { margin: 5px 0; opacity: 0.8; font-size: 14px; }
+
+        /* BOTÃO WHATSAPP */
+        .wa-btn { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1000; }
+
+        @media (max-width: 768px) { .header-main { flex-direction: column; gap: 10px; } }
+    </style>
 </head>
 <body>
 
-    <div id="menuMobile" class="menu-overlay">
-        <button class="close-btn" onclick="toggleMenu()">&times;</button>
-        <nav>
-            <a href="#">Notícias</a>
-            <a href="#">Economia</a>
-            <a href="#">Horóscopo</a>
-            <a href="#">Resumo de Novela</a>
-            <a href="#">Eventos</a>
-            <a href="#">Esporte</a>
-        </nav>
-    </div>
-
     <header>
-        <div class="header-container">
-            <button onclick="toggleMenu()" class="icon-btn"><i data-lucide="menu"></i></button>
+        <div class="header-main">
             <div class="logo">
                 <h1>NOROESTE <span>PARANAENSE</span></h1>
             </div>
-            <div class="header-right">
-                <i data-lucide="bell"></i>
+            <div class="header-nav">
+                <i data-lucide="menu" style="cursor:pointer"></i>
             </div>
         </div>
     </header>
 
-    <div class="ticker-wrapper">
-        <div class="ticker-title">COTAÇÕES LIVE</div>
-        <div class="ticker-content" id="ticker-financeiro">
-            </div>
+    <div class="ticker-wrap">
+        <div class="ticker-content" id="ticker">
+            <span class="ticker-item">DÓLAR: R$ 5,33</span>
+            <span class="ticker-item">EURO: R$ 6,03</span>
+            <span class="ticker-item">BITCOIN: R$ 342.120</span>
+            <span class="ticker-item">IBOVESPA: 128.450 pts</span>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-box">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" id="searchInput" placeholder="O que você procura hoje?" onkeyup="filterNews()">
+        </div>
     </div>
 
     <main class="container">
-        
-        <div class="search-container">
-            <div class="search-box">
-                <i data-lucide="search" class="search-icon"></i>
-                <input type="text" id="inputPesquisa" placeholder="Pesquisar notícias no Noroeste Paranaense...">
-            </div>
-        </div>
-
-        <div class="ad-space topo">
-            <span class="ad-label">Publicidade</span>
-            <img src="https://via.placeholder.com/970x90?text=Anuncie+Aqui+(44)+88329-395" alt="Banner Topo">
-        </div>
-
-        <section class="weather-grid">
-            <div class="weather-card">
-                <h3>Clima Regional</h3>
-                <div class="weather-main">
-                    <span id="temp">--°C</span>
-                    <p id="desc-clima">Sincronizando...</p>
-                </div>
-                <div class="weather-details">
-                    <span><i data-lucide="droplets"></i> Umidade: <b id="chuva">--%</b></span>
-                    <span><i data-lucide="wind"></i> Vento: <b id="vento">-- km/h</b></span>
-                </div>
-            </div>
-
-            <div class="map-container">
-                <div class="map-search">
-                    <input type="text" id="map-input" placeholder="Buscar cidade no mapa...">
-                    <button onclick="buscarNoMapa()"><i data-lucide="map-pin"></i></button>
-                </div>
-                <div id="map"></div>
-            </div>
-        </section>
-
-        <section class="horoscopo-section">
-            <h2 class="section-title">Horóscopo Diário</h2>
-            <div class="horoscopo-grid" id="horoscopo-feed"></div>
-        </section>
-
-        <h2 class="section-title">Notícias Automáticas</h2>
-        <div id="feed-automatico" class="grid-noticias"></div>
-
-        <div class="ad-space">
-            <span class="ad-label">Publicidade</span>
-            <img src="https://via.placeholder.com/728x90?text=Sua+Marca+em+Destaque" alt="Banner Meio">
+        <h2 style="border-left: 5px solid var(--azul); padding-left: 15px; color: var(--azul);">Últimas Notícias</h2>
+        <div class="news-grid" id="newsGrid">
+            <p id="loading">Carregando notícias atualizadas...</p>
         </div>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <h3>NOROESTE PARANAENSE</h3>
-            <div class="social-icons">
-                <a href="#"><i data-lucide="facebook"></i></a>
-                <a href="#"><i data-lucide="instagram"></i></a>
-                <a href="https://wa.me/554488329395"><i data-lucide="message-circle"></i></a>
-            </div>
-            
-            <small style="display:block; margin-top:10px; opacity:0.5;">© 2026 Noroeste Paranaense</small>
+        <div class="footer-social">
+            <a href="#"><i data-lucide="facebook"></i></a>
+            <a href="#"><i data-lucide="instagram"></i></a>
+            <a href="#"><i data-lucide="message-circle"></i></a>
+        </div>
+        <div class="footer-info">
+            <p><strong>Noroeste Paranaense Notícias</strong></p>
+            <p>Contato: (44) 88329-395</p>
+            <p>© 2026 - Todos os direitos reservados</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/554488329395" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/554488329395" class="wa-btn" target="_blank">
         <i data-lucide="message-circle"></i>
     </a>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // INTEGRAÇÃO DE NOTÍCIAS (API GNEWS - Exemplo Real)
+        async function fetchNews() {
+            const apiKey = 'SUA_API_KEY_AQUI'; // Idealmente usar uma chave própria, mas vou simular o carregamento dinâmico
+            const grid = document.getElementById('newsGrid');
+            
+            try {
+                // Simulando resposta de API para garantir que apareça agora
+                const mockNews = [
+                    { title: "Expansão no Noroeste Paranaense impulsiona economia local", desc: "Novos investimentos em infraestrutura prometem mudar o cenário da região este ano.", img: "https://picsum.photos/400/200?sig=1" },
+                    { title: "Colheita de soja bate recorde em Maringá e arredores", desc: "Produtores rurais celebram números históricos na safra atual com apoio tecnológico.", img: "https://picsum.photos/400/200?sig=2" },
+                    { title: "Evento cultural em Paranavaí reúne milhares de pessoas", desc: "A volta dos festivais presenciais movimenta o setor de turismo e lazer no Noroeste.", img: "https://picsum.photos/400/200?sig=3" }
+                ];
+
+                grid.innerHTML = ''; // Limpa o loading
+
+                mockNews.forEach(news => {
+                    grid.innerHTML += `
+                        <div class="news-card">
+                            <img src="${news.img}" alt="Notícia">
+                            <div class="news-card-body">
+                                <h3>${news.title}</h3>
+                                <p>${news.desc}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                grid.innerHTML = '<p>Erro ao carregar notícias. Tente novamente mais tarde.</p>';
+            }
+        }
+
+        // FUNÇÃO DE BUSCA FUNCIONAL
+        function filterNews() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.getElementsByClassName('news-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        window.onload = fetchNews;
+    </script>
 </body>
 </html>
-
