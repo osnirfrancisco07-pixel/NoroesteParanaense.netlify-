@@ -2,58 +2,152 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>OmniNews | Portal Global</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noroeste Paranaense | Super Portal</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
-        :root { --p: #2563eb; --bg: #ffffff; --txt: #0f172a; }
-        [data-theme="dark"] { --bg: #0f172a; --txt: #f8fafc; }
-        body { background: var(--bg); color: var(--txt); transition: 0.3s; font-family: sans-serif; }
-        .glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        /* CSS AVANÇADO - SUPORTE DARK MODE */
+        :root { --azul: #003366; --preto: #0e0e0e; --branco: #ffffff; --cinza: #f2f4f7; --alerta: #d9534f; --verde: #25d366; }
+        .dark { --azul: #001a33; --preto: #ffffff; --branco: #121212; --cinza: #1e1e1e; }
+        
+        body { background: var(--cinza); color: var(--preto); font-family: 'Segoe UI', sans-serif; transition: 0.3s; }
+        header { background: var(--azul); color: white; padding: 10px 20px; position: sticky; top: 0; z-index: 1000; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        
+        /* BREAKING NEWS */
+        .breaking { background: var(--alerta); color: white; font-size: 12px; padding: 5px; text-align: center; font-weight: bold; }
+
+        /* GRID E CARDS */
+        .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
+        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .card { background: var(--branco); border-radius: 8px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        
+        /* MENU LATERAL */
+        .side-menu { position: fixed; left: -300px; top: 0; width: 300px; height: 100%; background: var(--azul); z-index: 2000; transition: 0.4s; padding: 40px 20px; color: white; }
+        .side-menu.active { left: 0; }
+        .side-menu a { display: block; color: white; text-decoration: none; margin-bottom: 20px; font-size: 18px; }
+
+        /* UTILITÁRIOS */
+        .util-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .weather-info { font-size: 40px; font-weight: bold; color: var(--azul); }
+        #map { height: 250px; border-radius: 8px; }
+
+        @media (max-width: 768px) { .grid-layout { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <nav class="sticky top-0 z-50 p-4 border-b flex justify-between items-center glass">
-        <h1 class="text-2xl font-bold text-blue-600">OMNINEWS</h1>
-        <div class="flex gap-4">
-            <button onclick="document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')">🌓</button>
-            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold">Assinar</button>
-        </div>
+
+    <div class="breaking">🚨 URGENTE: Rodovia PR-317 liberada após obras no Noroeste</div>
+
+    <nav class="side-nav" id="sideNav">
+        <div onclick="toggleMenu()" style="cursor:pointer; text-align:right">✖ Fechar</div>
+        <a href="#">🚜 Agronegócio</a>
+        <a href="#">🚔 Policial</a>
+        <a href="#">💼 Vagas de Emprego</a>
+        <a href="#">🔮 Horóscopo</a>
+        <a href="#">🤣 Piadas e Memes</a>
+        <a href="#" onclick="toggleDark()">🌙 Modo Escuro</a>
     </nav>
 
-    <main class="max-w-6xl mx-auto p-6">
-        <div id="news-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <header>
+        <div class="header-top">
+            <button onclick="toggleMenu()" style="background:white; border:none; padding:8px; border-radius:5px;"><i data-lucide="menu"></i></button>
+            <div style="text-align:center">
+                <h1 style="font-size:18px">NOROESTE <span>PARANAENSE</span></h1>
             </div>
-    </main>
+            <button onclick="toggleDark()" style="background:white; border:none; padding:8px; border-radius:5px;"><i data-lucide="moon"></i></button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <input type="text" placeholder="Buscar em 50 categorias..." style="width:100%; padding:10px; border-radius:5px; border:1px solid #ccc;">
+        </div>
+
+        <div class="grid-layout">
+            <section>
+                <div class="card">
+                    <img src="https://picsum.photos/600/300?sig=1" style="width:100%; border-radius:5px;">
+                    <h2 style="margin-top:10px; font-size:18px;">Notícia Principal: Safra Recorde no Paraná</h2>
+                    <p style="font-size:14px; color:#666;">Estimativa aponta crescimento de 15% na colheita regional...</p>
+                    <small>⏱ Leitura: 3 min</small>
+                </div>
+                
+                <div class="util-grid">
+                    <div class="card"><h3>💼 Empregos</h3><p>5 novas vagas em Maringá hoje.</p></div>
+                    <div class="card"><h3>🚜 Agro</h3><p>Soja: R$ 134,50</p></div>
+                </div>
+            </section>
+
+            <aside>
+                <div class="card">
+                    <h3>🌡 Clima Regional</h3>
+                    <div class="weather-info" id="temp">--°C</div>
+                    <p id="desc">Sincronizando...</p>
+                </div>
+                
+                <div class="card">
+                    <h3>📍 Mapa Interativo</h3>
+                    <input type="text" id="mapSearch" placeholder="Cidades/Ruas" style="width:100%; margin-bottom:5px;">
+                    <button onclick="searchMap()" style="width:100%; background:var(--azul); color:white; border:none; padding:5px; cursor:pointer">Buscar</button>
+                    <div id="map"></div>
+                </div>
+
+                <div class="card">
+                    <h3>💵 Cotações Moedas</h3>
+                    <div id="moedas" style="font-size:12px; font-weight:bold;">Carregando...</div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <a href="https://wa.me/554488329395" style="position:fixed; bottom:20px; right:20px; background:var(--verde); color:white; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.3); z-index:3000;">
+        <i data-lucide="message-circle"></i>
+    </a>
 
     <script>
-        const API_URL = "http://localhost:3000/api/news";
+        lucide.createIcons();
 
-        async function loadNews() {
-            try {
-                // Em produção, descomente a linha abaixo:
-                // const response = await fetch(API_URL);
-                // const data = await response.json();
-                
-                // Mock de dados para teste imediato:
-                const mock = [
-                    { title: "IA de 2026 supera expectativas", cat: "Tech", img: "https://picsum.photos/400/250?1" },
-                    { title: "Mercado Global em Alta", cat: "Finanças", img: "https://picsum.photos/400/250?2" }
-                ];
+        function toggleMenu() { document.getElementById('sideNav').classList.toggle('active'); }
+        function toggleDark() { document.body.classList.toggle('dark'); }
 
-                document.getElementById('news-grid').innerHTML = mock.map(n => `
-                    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
-                        <img src="${n.img}" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <span class="text-xs font-bold text-blue-500 uppercase">${n.cat}</span>
-                            <h2 class="text-xl font-bold mt-2">${n.title}</h2>
-                            <button class="mt-4 text-blue-600 font-semibold">Ler mais →</button>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (e) { console.error("Erro ao carregar notícias"); }
+        // MAPA
+        var map = L.map('map').setView([-23.42, -51.93], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        var marker = L.marker([-23.42, -51.93]).addTo(map);
+
+        async function searchMap() {
+            const q = document.getElementById('mapSearch').value;
+            const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${q}`);
+            const d = await r.json();
+            if(d[0]) {
+                const {lat, lon} = d[0];
+                map.setView([lat, lon], 13);
+                if(marker) map.removeLayer(marker);
+                marker = L.marker([lat, lon]).addTo(map).bindPopup(q).openPopup();
+            }
         }
-        window.onload = loadNews;
+
+        // MOEDAS API
+        async function getMoedas() {
+            const r = await fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL');
+            const d = await r.json();
+            document.getElementById('moedas').innerHTML = `
+                DÓLAR: R$ ${d.USDBRL.bid}<br>EURO: R$ ${d.EURBRL.bid}<br>BITCOIN: R$ ${d.BTCBRL.bid}
+            `;
+        }
+
+        // CLIMA API
+        async function getClima() {
+            const r = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-23.42&longitude=-51.93&current_weather=true');
+            const d = await r.json();
+            document.getElementById('temp').innerText = Math.round(d.current_weather.temperature) + '°C';
+            document.getElementById('desc').innerText = 'Tempo em Maringá/Região';
+        }
+
+        window.onload = () => { getMoedas(); getClima(); };
     </script>
 </body>
 </html>
