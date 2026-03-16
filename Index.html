@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noroeste Paranaense | Portal de Notícias</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <div id="menuMobile" class="menu-overlay">
+        <button class="close-btn" onclick="toggleMenu()">&times;</button>
+        <nav>
+            <a href="#">Notícias</a>
+            <a href="#">Economia</a>
+            <a href="#">Horóscopo</a>
+            <a href="#">Resumo de Novela</a>
+            <a href="#">Eventos</a>
+            <a href="#">Esporte</a>
+        </nav>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <button onclick="toggleMenu()" class="icon-btn"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <h1>NOROESTE <span>PARANAENSE</span></h1>
+            </div>
+            <div class="header-right">
+                <i data-lucide="bell"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="ticker-wrapper">
+        <div class="ticker-title">COTAÇÕES LIVE</div>
+        <div class="ticker-content" id="ticker-financeiro">
+            </div>
+    </div>
+
+    <main class="container">
+        
+        <div class="search-container">
+            <div class="search-box">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="inputPesquisa" placeholder="Pesquisar notícias no Noroeste Paranaense...">
+            </div>
+        </div>
+
+        <div class="ad-space topo">
+            <span class="ad-label">Publicidade</span>
+            <img src="https://via.placeholder.com/970x90?text=Anuncie+Aqui+(44)+88329-395" alt="Banner Topo">
+        </div>
+
+        <section class="weather-grid">
+            <div class="weather-card">
+                <h3>Clima Regional</h3>
+                <div class="weather-main">
+                    <span id="temp">--°C</span>
+                    <p id="desc-clima">Sincronizando...</p>
+                </div>
+                <div class="weather-details">
+                    <span><i data-lucide="droplets"></i> Umidade: <b id="chuva">--%</b></span>
+                    <span><i data-lucide="wind"></i> Vento: <b id="vento">-- km/h</b></span>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <div class="map-search">
+                    <input type="text" id="map-input" placeholder="Buscar cidade no mapa...">
+                    <button onclick="buscarNoMapa()"><i data-lucide="map-pin"></i></button>
+                </div>
+                <div id="map"></div>
+            </div>
+        </section>
+
+        <section class="horoscopo-section">
+            <h2 class="section-title">Horóscopo Diário</h2>
+            <div class="horoscopo-grid" id="horoscopo-feed"></div>
+        </section>
+
+        <h2 class="section-title">Notícias Automáticas</h2>
+        <div id="feed-automatico" class="grid-noticias"></div>
+
+        <div class="ad-space">
+            <span class="ad-label">Publicidade</span>
+            <img src="https://via.placeholder.com/728x90?text=Sua+Marca+em+Destaque" alt="Banner Meio">
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>NOROESTE PARANAENSE</h3>
+            <div class="social-icons">
+                <a href="#"><i data-lucide="facebook"></i></a>
+                <a href="#"><i data-lucide="instagram"></i></a>
+                <a href="https://wa.me/554488329395"><i data-lucide="message-circle"></i></a>
+            </div>
+            
+            <small style="display:block; margin-top:10px; opacity:0.5;">© 2026 Noroeste Paranaense</small>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/554488329395" class="whatsapp-float" target="_blank">
+        <i data-lucide="message-circle"></i>
+    </a>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
