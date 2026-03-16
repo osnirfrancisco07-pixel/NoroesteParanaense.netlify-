@@ -1,3 +1,6 @@
+-- Arquivo: /database/schema.sql
+
+-- Tabela de Notícias
 CREATE TABLE articles (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
