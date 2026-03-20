@@ -3,62 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BA Notícias | Marilena e Região</title>
+    <title>Noroeste Paranaense | Notícias de Marilena e Região</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<header class="main-header">
-    <div class="logo-area">
-        <h1>BA NOTÍCIAS</h1>
-        <p>A voz de Marilena para o Noroeste Paranaense</p>
+<header>
+    <div class="logo">
+        NOROESTE
+        <span class="sub-logo">PARANAENSE</span>
+    </div>
+
+    <div class="ticker-container">
+        <div class="ticker-wrapper">
+            <div class="ticker-content" id="cotacao-ticker">
+                <span>USD/BRL: R$ 5,10 | BTC/BRL: R$ 340.500 | Marilena/PR: Recorde Mundial batido hoje! | </span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#">Notícias</a></li>
+            <li><a href="#">Vagas de emprego</a></li>
+            <li><a href="#">Farmácias de plantão</a></li>
+            <li><a href="#">Esporte</a></li>
+            <li><a href="#">Economia</a></li>
+            <li><a href="#">Previsão do tempo</a></li>
+            <li><a href="#">Resumo de novelas</a></li>
+            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Eventos</a></li>
+            <li><a href="#">Política</a></li>
+            <li><a href="#">Memes</a></li>
+            <li><a href="#">Horóscopo</a></li>
+            <li><a href="#">Compra e vendas</a></li>
+            <li><a href="#">Concursos</a></li>
+            <li><a href="#">Campanhas</a></li>
+            <li><a href="#">Turismo</a></li>
+            <li><a href="#">Receitas</a></li>
+            <li><a href="#">Loterias</a></li>
+            <li><a href="#">Famosos</a></li>
+        </ul>
+    </nav>
+
+    <div class="search-bar-container">
+        <div class="search-box">
+            <input type="text" id="inputPesquisa" placeholder="Pesquisar notícias...">
+            <button onclick="buscar()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
     </div>
 </header>
 
-<div class="main-container">
-    
-    <main class="content-area">
-        <article class="featured-post">
-            <span class="category-tag">Mundo Curioso</span>
-            <h2>Marilenense entra para o Livro dos Recordes após "pane seca" 62 vezes no ano</h2>
-            
-            <div class="image-box">
-                <a href="https://images.unsplash.com/photo-1558981403-c5f91cbba527?auto=format&fit=crop&w=800" target="_blank">
-                    📸 VER FOTO DO RECORDISTA E SUA MOTO
-                </a>
+<main class="container">
+
+    <section class="weather-card">
+        <h2 id="cidade">Marilena, PR</h2>
+        <div id="temperatura">28°C</div>
+        <p id="condicao">Ensolarado</p>
+    </section>
+
+    <section class="news-feed">
+        
+        <article class="news-card highlight">
+            <div class="news-badge">EXCLUSIVO</div>
+            <div class="news-image-placeholder">
+                <i class="fas fa-motorcycle"></i>
             </div>
-
-            <div class="article-text">
-                <p>O que para muitos seria motivo de estresse, para um morador de <strong>Marilena</strong> virou título mundial. Ele oficializou o recorde de maior número de vezes ficando sem combustível em 12 meses.</p>
-                <p>Com exatas 62 paradas não planejadas, o recordista afirma que já decorou cada centímetro do acostamento das estradas da região.</p>
-            </div>
-        </article>
-    </main>
-
-    <aside class="sidebar-area">
-        <h3>Mais Lidas</h3>
-
-        <div class="side-item">
-            <h4>Calor em Marilena: Sensação térmica sobe esta semana</h4>
-            <a href="#">Ler notícia →</a>
-        </div>
-
-        <div class="side-item">
-            <h4>Turismo no Rio Paraná cresce 20% no último semestre</h4>
-            <a href="#">Ler notícia →</a>
-        </div>
-
-        <div class="side-item">
-            <h4>Dicas: Como conferir o nível de combustível da sua moto</h4>
-            <a href="#">Ler notícia →</a>
-        </div>
-    </aside>
-
-</div>
-
-<footer class="main-footer">
-    <p>&copy; 2026 BA Notícias - Orgulho de ser Marilenense</p>
-</footer>
-
-</body>
-</html>
+            <div class="news-body">
+                <span class="news-location">Marilena</span>
+                <h3>Homem entra para o Livro dos Recordes após acabar a gasolina da moto mais de 60 vezes no ano</h3>
+                <p>O morador local atingiu a marca histórica de 62 vezes em "pane seca". O feito
