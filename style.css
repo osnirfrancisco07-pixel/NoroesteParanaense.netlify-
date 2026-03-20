@@ -1,0 +1,60 @@
+/* Cores e Reset */
+:root {
+    --azul-prime: #003366;
+    --azul-dark: #002244;
+    --branco: #ffffff;
+    --cinza-claro: #f4f7f6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+body { background-color: var(--cinza-claro); }
+
+/* 5. Cotação Ticker */
+.ticker-container { background: #e9ecef; border-bottom: 1px solid #ddd; padding: 8px 0; font-size: 14px; font-weight: bold; color: var(--azul-prime); }
+
+/* Barra de Pesquisa */
+.search-bar-container { background: #fff; padding: 20px; display: flex; justify-content: center; }
+.search-box { display: flex; width: 100%; max-width: 800px; border: 1px solid #ccc; border-radius: 30px; overflow: hidden; }
+.search-box input { flex: 1; border: none; padding: 12px 20px; outline: none; }
+.search-box button { background: var(--azul-prime); color: white; border: none; padding: 0 25px; cursor: pointer; }
+
+/* 1. Header & Menu */
+.navbar { background: var(--azul-prime); color: white; display: flex; align-items: center; justify-content: space-between; padding: 15px 5%; position: sticky; top: 0; z-index: 1000; }
+.logo { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; }
+.sub-logo { font-weight: 300; }
+
+.nav-menu { display: flex; list-style: none; gap: 15px; }
+.nav-menu a { color: white; text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
+.nav-menu a:hover { opacity: 0.7; }
+
+.menu-toggle { font-size: 1.5rem; cursor: pointer; display: none; }
+
+/* 4. Previsão do Tempo Widget */
+.weather-card { background: var(--azul-prime); color: white; border-radius: 8px; padding: 30px; margin: 20px auto; max-width: 400px; text-align: center; }
+.temp-main { font-size: 3rem; margin: 10px 0; }
+
+/* 3. Rodapé */
+footer { background: var(--azul-prime); color: white; padding: 30px 0; text-align: center; margin-top: 50px; }
+.social-links { margin-top: 15px; display: flex; justify-content: center; gap: 20px; }
+.social-icon { font-size: 2rem; text-decoration: none; }
+.fb { color: #1877F2; }
+.insta { color: #E4405F; }
+.whats { color: #25D366; }
+
+/* 7. Responsividade */
+@media (max-width: 1024px) {
+    .nav-menu {
+        display: none; /* Esconde para o hambúrguer assumir */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--azul-dark);
+        padding: 20px;
+    }
+    .nav-menu.active { display: flex; }
+    .menu-toggle { display: block; }
+}
+

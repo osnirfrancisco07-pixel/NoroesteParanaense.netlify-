@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noroeste Paranaense | Portal de Notícias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="ticker-container">
+        <marquee behavior="scroll" direction="left" id="cotacao-ticker">
+            Carregando cotações em tempo real...
+        </marquee>
+    </div>
+
+    <div class="search-bar-container">
+        <div class="search-box">
+            <input type="text" id="inputPesquisa" placeholder="Pesquisar por cidades, notícias ou eventos...">
+            <button onclick="buscar()"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="logo">NOROESTE <span class="sub-logo">PARANAENSE</span></div>
+            
+            <div class="header-spacer"></div> <ul class="nav-menu">
+                <li><a href="#">Notícias</a></li>
+                <li><a href="#">Vagas de Emprego</a></li>
+                <li><a href="#">Farmácias de Plantão</a></li>
+                <li><a href="#">Horóscopo</a></li>
+                <li><a href="#">Resumo de Novela</a></li>
+                <li><a href="#">Esporte</a></li>
+                <li><a href="#">Economia</a></li>
+                <li><a href="#">Previsão do Tempo</a></li>
+                <li><a href="#">Política</a></li>
+                <li><a href="#">Parcerias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="weather-card">
+            <div class="weather-content">
+                <h2 id="cidade">Maringá, PR</h2>
+                <div class="temp-main">
+                    <span id="temperatura">--°C</span>
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
+                <p id="condicao">Sincronizando clima...</p>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <div class="news-item">
+                <p>As notícias integradas ao painel administrativo aparecerão aqui.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Nos siga nas redes sociais</p>
+            <div class="social-links">
+                <a href="#" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon insta"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon whats"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
