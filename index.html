@@ -13,15 +13,17 @@
 
 <header>
 
-    <!-- LOGO -->
     <div class="logo">
         NOROESTE
         <span class="sub-logo">PARANAENSE</span>
     </div>
 
-    <!-- COTAÇÕES -->
+    <!-- COTAÇÕES (SCROLL INFINITO) -->
     <div class="ticker-container">
-        <marquee id="cotacao-ticker">Carregando cotações...</marquee>
+        <div class="ticker-wrapper">
+            <div class="ticker-content" id="cotacao-ticker"></div>
+            <div class="ticker-content" id="cotacao-ticker-dup"></div>
+        </div>
     </div>
 
     <!-- MENU -->
@@ -32,29 +34,28 @@
 
         <ul class="nav-menu" id="nav-menu">
             <li><a href="#">Notícias</a></li>
-            <li><a href="#">vagas de Emprego</a></li>
+            <li><a href="#">Vagas de emprego</a></li>
             <li><a href="#">Farmácias de plantão</a></li>
             <li><a href="#">Esporte</a></li>
             <li><a href="#">Economia</a></li>
-            <li><a href="#">previsao do Tempo</a></li>
-            <li><a href="#">resumo de novelas</a></li>
-           <li><a href="#"> serviços</a></li>
-           <li><a href="#">eventos</a></li>
-           <li><a href="#">politica</a></li>
-           <li><a href="#">memes</a></li>
-           <li><a href="#">horóscopo do dia</a></li>
-           <li><a href="#">compra e vendas</a></li>
-           <li><a href="#">concursos</a></li>
-           <li><a href="#">campanha publicitária</a></li>
-           <li><a href="#">pontos turistico</a></li>
-           <li><a href="#">receitas</a></li>
-           <li><a href="#">loterias</a></li>
-           <li><a href="#">noticia dos famosos</a></li>
-          
+            <li><a href="#">Previsão do tempo</a></li>
+            <li><a href="#">Resumo de novelas</a></li>
+            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Eventos</a></li>
+            <li><a href="#">Política</a></li>
+            <li><a href="#">Memes</a></li>
+            <li><a href="#">Horóscopo</a></li>
+            <li><a href="#">Compra e vendas</a></li>
+            <li><a href="#">Concursos</a></li>
+            <li><a href="#">Campanhas</a></li>
+            <li><a href="#">Turismo</a></li>
+            <li><a href="#">Receitas</a></li>
+            <li><a href="#">Loterias</a></li>
+            <li><a href="#">Famosos</a></li>
         </ul>
     </nav>
 
-    <!-- PESQUISA (AGORA ABAIXO DO MENU E ALINHADA À ESQUERDA) -->
+    <!-- BUSCA -->
     <div class="search-bar-container">
         <div class="search-box">
             <input type="text" id="inputPesquisa" placeholder="Pesquisar notícias...">
@@ -70,7 +71,7 @@
 
     <section class="weather-card">
         <h2 id="cidade">Carregando...</h2>
-        <div class="temp-main" id="temperatura">--°C</div>
+        <div id="temperatura">--°C</div>
         <p id="condicao">...</p>
     </section>
 
@@ -82,7 +83,7 @@
     <div class="social-links">
         <a href="#" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="social-icon insta"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/5544988329395text=Olá%20quero%20anunciar" target="_blank" class="social-icon whats">
+        <a href="https://wa.me/5599999999999" target="_blank" class="social-icon whats">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
