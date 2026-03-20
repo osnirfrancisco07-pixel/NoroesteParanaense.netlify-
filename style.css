@@ -1,10 +1,10 @@
- :root {
+:root {
     --azul: #003366;
 }
 
 body {
     margin: 0;
-    font-family: Arial;
+    font-family: Arial, Helvetica, sans-serif;
     background: #f4f7f6;
 }
 
@@ -22,60 +22,63 @@ body {
     font-size: 14px;
 }
 
-/* COTAÇÕES */
+/* COTAÇÕES (SCROLL INFINITO) */
 .ticker-container {
+    overflow: hidden;
     background: #eee;
     padding: 8px;
-    text-align: center;
 }
 
-/* COTAÇÕES - UMA LINHA */
-#cotacao-ticker {
+.ticker-wrapper {
+    display: flex;
+    width: max-content;
+}
+
+.ticker-content {
+    display: flex;
+    gap: 40px;
     white-space: nowrap;
+    padding-right: 50px;
+    animation: scroll 20s linear infinite;
 }
 
-/* CORES DAS COTAÇÕES */
-.moeda {
-    color: #003366;
-    font-weight: bold;
-}
-
-.valor {
-    color: #1b8f3a;
-    font-weight: bold;
-}
-
-.sep {
-    color: #555;
-    margin: 0 5px;
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
 }
 
 /* MENU */
 .navbar {
     background: var(--azul);
     padding: 10px;
-    position: sticky;
-    top: 0;
+    display: flex;
+    align-items: center;
 }
 
+/* MENU DESKTOP */
 .nav-menu {
     display: flex;
     list-style: none;
-    justify-content: center;
     gap: 15px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.nav-menu li {
+    white-space: nowrap;
 }
 
 .nav-menu a {
     color: white;
     text-decoration: none;
+    padding: 5px;
 }
 
-/* PESQUISA - ABAIXO DO MENU E À ESQUERDA */
+/* BUSCA */
 .search-bar-container {
     background: white;
     padding: 15px 5%;
     display: flex;
-    justify-content: flex-start; /* ESQUERDA */
 }
 
 .search-box {
@@ -94,15 +97,17 @@ body {
     color: white;
     border: none;
     padding: 10px;
+    cursor: pointer;
 }
 
 /* CLIMA */
 .weather-card {
-    background: var(--azul);
+    background: linear-gradient(135deg, #003366, #0055a5);
     color: white;
     margin: 20px;
-    padding: 20px;
+    padding: 25px;
     text-align: center;
+    border-radius: 10px;
 }
 
 /* RODAPÉ */
@@ -122,24 +127,39 @@ footer {
 .insta { color: #E4405F; }
 .whats { color: #25D366; }
 
-/* MOBILE */
+/* BOTÃO MENU */
 .menu-toggle {
     display: none;
     color: white;
-    font-size: 20px;
+    font-size: 22px;
+    cursor: pointer;
 }
 
+/* MOBILE */
 @media(max-width:768px){
+
+    .menu-toggle {
+        display: block;
+    }
+
     .nav-menu {
         display: none;
         flex-direction: column;
+        position: absolute;
+        background: var(--azul);
+        width: 250px;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        padding-top: 60px;
     }
 
     .nav-menu.active {
         display: flex;
     }
 
-    .menu-toggle {
-        display: block;
+    .nav-menu li {
+        padding: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
     }
 }
