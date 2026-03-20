@@ -3,80 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noroeste Paranaense | Portal de Notícias</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Noroeste Paranaense</title>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
-    <div class="ticker-container">
-        <marquee behavior="scroll" direction="left" id="cotacao-ticker">
-            Carregando cotações em tempo real...
-        </marquee>
+<header>
+
+    <!-- LOGO -->
+    <div class="logo">
+        NOROESTE
+        <span class="sub-logo">PARANAENSE</span>
     </div>
 
+    <!-- COTAÇÕES -->
+    <div class="ticker-container">
+        <marquee id="cotacao-ticker">Carregando cotações...</marquee>
+    </div>
+
+    <!-- MENU -->
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="#">Notícias</a></li>
+            <li><a href="#">vagas de Emprego</a></li>
+            <li><a href="#">Farmácias de plantão</a></li>
+            <li><a href="#">Esporte</a></li>
+            <li><a href="#">Economia</a></li>
+            <li><a href="#">previsao do Tempo</a></li>
+            <li><a href="#">resumo de novelas</a></li>
+           <li><a href="#"> serviços</a></li>
+           <li><a href="#">eventos</a></li>
+           <li><a href="#">politica</a></li>
+           <li><a href="#">memes</a></li>
+           <li><a href="#">horóscopo do dia</a></li>
+           <li><a href="#">compra e vendas</a></li>
+           <li><a href="#">concursos</a></li>
+           <li><a href="#">campanha publicitária</a></li>
+           <li><a href="#">pontos turistico</a></li>
+           <li><a href="#">receitas</a></li>
+           <li><a href="#">loterias</a></li>
+           <li><a href="#">noticia dos famosos</a></li>
+          
+        </ul>
+    </nav>
+
+    <!-- PESQUISA (AGORA ABAIXO DO MENU E ALINHADA À ESQUERDA) -->
     <div class="search-bar-container">
         <div class="search-box">
-            <input type="text" id="inputPesquisa" placeholder="Pesquisar por cidades, notícias ou eventos...">
-            <button onclick="buscar()"><i class="fas fa-search"></i></button>
+            <input type="text" id="inputPesquisa" placeholder="Pesquisar notícias...">
+            <button onclick="buscar()">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
     </div>
 
-    <header>
-        <nav class="navbar">
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            
-            <div class="logo">NOROESTE <span class="sub-logo">PARANAENSE</span></div>
-            
-            <div class="header-spacer"></div> <ul class="nav-menu">
-                <li><a href="#">Notícias</a></li>
-                <li><a href="#">Vagas de Emprego</a></li>
-                <li><a href="#">Farmácias de Plantão</a></li>
-                <li><a href="#">Horóscopo</a></li>
-                <li><a href="#">Resumo de Novela</a></li>
-                <li><a href="#">Esporte</a></li>
-                <li><a href="#">Economia</a></li>
-                <li><a href="#">Previsão do Tempo</a></li>
-                <li><a href="#">Política</a></li>
-                <li><a href="#">Parcerias</a></li>
-            </ul>
-        </nav>
-    </header>
+</header>
 
-    <main class="container">
-        <section class="weather-card">
-            <div class="weather-content">
-                <h2 id="cidade">Maringá, PR</h2>
-                <div class="temp-main">
-                    <span id="temperatura">--°C</span>
-                    <i class="fas fa-cloud-sun"></i>
-                </div>
-                <p id="condicao">Sincronizando clima...</p>
-            </div>
-        </section>
+<main class="container">
 
-        <section class="news-section">
-            <div class="news-item">
-                <p>As notícias integradas ao painel administrativo aparecerão aqui.</p>
-            </div>
-        </section>
-    </main>
+    <section class="weather-card">
+        <h2 id="cidade">Carregando...</h2>
+        <div class="temp-main" id="temperatura">--°C</div>
+        <p id="condicao">...</p>
+    </section>
 
-    <footer>
-        <div class="footer-content">
-            <p>Nos siga nas redes sociais</p>
-            <div class="social-links">
-                <a href="#" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon insta"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon whats"><i class="fab fa-whatsapp"></i></a>
-            </div>
-        </div>
-    </footer>
+</main>
 
-    <script src="script.js"></script>
+<footer>
+    <p>Nos siga nas redes</p>
+
+    <div class="social-links">
+        <a href="#" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon insta"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/5599999999999?text=Olá%20quero%20anunciar" target="_blank" class="social-icon whats">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
-
-
