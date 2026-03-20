@@ -1,165 +1,218 @@
-:root {
-    --azul: #003366;
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
+/* BODY */
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f7f6;
+    background: #f4f4f4;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: #0d1b2a;
+    color: #fff;
+    padding: 10px;
 }
 
 /* LOGO */
 .logo {
-    text-align: center;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
-    padding: 15px;
-    color: var(--azul);
 }
 
 .sub-logo {
     display: block;
-    font-size: 14px;
+    font-size: 12px;
+    color: #ccc;
 }
 
-/* COTAÇÕES (SCROLL INFINITO) */
+/* TICKER */
 .ticker-container {
+    width: 100%;
     overflow: hidden;
-    background: #eee;
-    padding: 8px;
+    background: #111;
+    margin-top: 10px;
 }
 
 .ticker-wrapper {
     display: flex;
     width: max-content;
+    animation: scrollTicker 20s linear infinite;
 }
 
 .ticker-content {
     display: flex;
     gap: 40px;
-    white-space: nowrap;
-    padding-right: 50px;
-    animation: scroll 20s linear infinite;
+    padding-right: 40px;
 }
 
-@keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100%); }
+.ticker-content span {
+    white-space: nowrap;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* CORES DAS MOEDAS */
+#cotacao-ticker span:nth-child(1) {
+    color: #00ffcc; /* Dólar */
+}
+
+#cotacao-ticker span:nth-child(2) {
+    color: #ffd700; /* Euro */
+}
+
+#cotacao-ticker span:nth-child(3) {
+    color: #ff4d4d; /* Bitcoin */
+}
+
+/* ANIMAÇÃO TICKER */
+@keyframes scrollTicker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 /* MENU */
 .navbar {
-    background: var(--azul);
-    padding: 10px;
-    display: flex;
-    align-items: center;
+    margin-top: 10px;
 }
 
-/* MENU DESKTOP */
+/* MENU HORIZONTAL */
 .nav-menu {
     display: flex;
-    list-style: none;
-    gap: 15px;
     flex-wrap: nowrap;
     overflow-x: auto;
-}
-
-.nav-menu li {
     white-space: nowrap;
+    list-style: none;
+    background: #1b263b;
+    padding: 10px;
 }
 
-.nav-menu a {
-    color: white;
+/* ITENS DO MENU */
+.nav-menu li {
+    margin-right: 15px;
+}
+
+.nav-menu li a {
+    color: #fff;
     text-decoration: none;
-    padding: 5px;
+    padding: 8px 12px;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.nav-menu li a:hover {
+    background: #415a77;
+    border-radius: 5px;
+}
+
+/* MENU MOBILE */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 /* BUSCA */
 .search-bar-container {
-    background: white;
-    padding: 15px 5%;
-    display: flex;
+    margin: 10px;
 }
 
 .search-box {
     display: flex;
-    width: 100%;
     max-width: 400px;
+    margin: auto;
 }
 
 .search-box input {
     flex: 1;
-    padding: 10px;
+    padding: 8px;
+    border: none;
+    outline: none;
 }
 
 .search-box button {
-    background: var(--azul);
-    color: white;
+    padding: 8px 12px;
     border: none;
-    padding: 10px;
+    background: #415a77;
+    color: #fff;
     cursor: pointer;
 }
 
-/* CLIMA */
-.weather-card {
-    background: linear-gradient(135deg, #003366, #0055a5);
-    color: white;
-    margin: 20px;
-    padding: 25px;
-    text-align: center;
-    border-radius: 10px;
+.search-box button:hover {
+    background: #1b263b;
 }
 
-/* RODAPÉ */
-footer {
-    background: var(--azul);
-    color: white;
-    text-align: center;
+/* MAIN */
+.container {
     padding: 20px;
 }
 
+/* WEATHER */
+.weather-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.weather-card h2 {
+    margin-bottom: 10px;
+}
+
+/* FOOTER */
+footer {
+    background: #0d1b2a;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
 .social-icon {
-    font-size: 20px;
-    margin: 10px;
+    color: #fff;
+    margin: 0 10px;
+    font-size: 18px;
+    transition: 0.3s;
 }
 
-.fb { color: #1877F2; }
-.insta { color: #E4405F; }
-.whats { color: #25D366; }
-
-/* BOTÃO MENU */
-.menu-toggle {
-    display: none;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
+.social-icon:hover {
+    color: #00ffcc;
 }
 
-/* MOBILE */
-@media(max-width:768px){
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
 
     .menu-toggle {
         display: block;
+        margin-bottom: 10px;
     }
 
     .nav-menu {
-        display: none;
         flex-direction: column;
-        position: absolute;
-        background: var(--azul);
-        width: 250px;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        padding-top: 60px;
+        display: none;
     }
 
     .nav-menu.active {
         display: flex;
     }
 
-    .nav-menu li {
-        padding: 15px;
-        border-bottom: 1px solid rgba(255,255,255,0.2);
+    .search-box {
+        width: 100%;
     }
 }
