@@ -1,60 +1,145 @@
-/* Cores e Reset */
-:root {
-    --azul-prime: #003366;
-    --azul-dark: #002244;
-    --branco: #ffffff;
-    --cinza-claro: #f4f7f6;
+ :root {
+    --azul: #003366;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f4f7f6;
+}
 
-body { background-color: var(--cinza-claro); }
+/* LOGO */
+.logo {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 15px;
+    color: var(--azul);
+}
 
-/* 5. Cotação Ticker */
-.ticker-container { background: #e9ecef; border-bottom: 1px solid #ddd; padding: 8px 0; font-size: 14px; font-weight: bold; color: var(--azul-prime); }
+.sub-logo {
+    display: block;
+    font-size: 14px;
+}
 
-/* Barra de Pesquisa */
-.search-bar-container { background: #fff; padding: 20px; display: flex; justify-content: center; }
-.search-box { display: flex; width: 100%; max-width: 800px; border: 1px solid #ccc; border-radius: 30px; overflow: hidden; }
-.search-box input { flex: 1; border: none; padding: 12px 20px; outline: none; }
-.search-box button { background: var(--azul-prime); color: white; border: none; padding: 0 25px; cursor: pointer; }
+/* COTAÇÕES */
+.ticker-container {
+    background: #eee;
+    padding: 8px;
+    text-align: center;
+}
 
-/* 1. Header & Menu */
-.navbar { background: var(--azul-prime); color: white; display: flex; align-items: center; justify-content: space-between; padding: 15px 5%; position: sticky; top: 0; z-index: 1000; }
-.logo { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; }
-.sub-logo { font-weight: 300; }
+/* COTAÇÕES - UMA LINHA */
+#cotacao-ticker {
+    white-space: nowrap;
+}
 
-.nav-menu { display: flex; list-style: none; gap: 15px; }
-.nav-menu a { color: white; text-decoration: none; font-size: 0.85rem; transition: 0.3s; }
-.nav-menu a:hover { opacity: 0.7; }
+/* CORES DAS COTAÇÕES */
+.moeda {
+    color: #003366;
+    font-weight: bold;
+}
 
-.menu-toggle { font-size: 1.5rem; cursor: pointer; display: none; }
+.valor {
+    color: #1b8f3a;
+    font-weight: bold;
+}
 
-/* 4. Previsão do Tempo Widget */
-.weather-card { background: var(--azul-prime); color: white; border-radius: 8px; padding: 30px; margin: 20px auto; max-width: 400px; text-align: center; }
-.temp-main { font-size: 3rem; margin: 10px 0; }
+.sep {
+    color: #555;
+    margin: 0 5px;
+}
 
-/* 3. Rodapé */
-footer { background: var(--azul-prime); color: white; padding: 30px 0; text-align: center; margin-top: 50px; }
-.social-links { margin-top: 15px; display: flex; justify-content: center; gap: 20px; }
-.social-icon { font-size: 2rem; text-decoration: none; }
+/* MENU */
+.navbar {
+    background: var(--azul);
+    padding: 10px;
+    position: sticky;
+    top: 0;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+/* PESQUISA - ABAIXO DO MENU E À ESQUERDA */
+.search-bar-container {
+    background: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: flex-start; /* ESQUERDA */
+}
+
+.search-box {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px;
+}
+
+.search-box button {
+    background: var(--azul);
+    color: white;
+    border: none;
+    padding: 10px;
+}
+
+/* CLIMA */
+.weather-card {
+    background: var(--azul);
+    color: white;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* RODAPÉ */
+footer {
+    background: var(--azul);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.social-icon {
+    font-size: 20px;
+    margin: 10px;
+}
+
 .fb { color: #1877F2; }
 .insta { color: #E4405F; }
 .whats { color: #25D366; }
 
-/* 7. Responsividade */
-@media (max-width: 1024px) {
-    .nav-menu {
-        display: none; /* Esconde para o hambúrguer assumir */
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--azul-dark);
-        padding: 20px;
-    }
-    .nav-menu.active { display: flex; }
-    .menu-toggle { display: block; }
+/* MOBILE */
+.menu-toggle {
+    display: none;
+    color: white;
+    font-size: 20px;
 }
 
+@media(max-width:768px){
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
