@@ -1,145 +1,58 @@
- :root {
-    --azul: #003366;
+// MENU MOBILE
+const menu = document.getElementById("mobile-menu");
+const nav = document.getElementById("nav-menu");
+
+menu.addEventListener("click", () => {
+    nav.classList.toggle("active");
+});
+
+// BUSCA
+function buscar() {
+    let termo = document.getElementById("inputPesquisa").value;
+    alert("Você pesquisou: " + termo);
 }
 
-body {
-    margin: 0;
-    font-family: Arial;
-    background: #f4f7f6;
-}
+// COTAÇÕES COM CORES
+async function carregarCotacoes() {
+    try {
+        let res = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-BRL");
+        let data = await res.json();
 
-/* LOGO */
-.logo {
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    padding: 15px;
-    color: var(--azul);
-}
+        let texto = `
+            <span class="moeda">Dólar:</span> 
+            <span class="valor">R$ ${parseFloat(data.USDBRL.bid).toFixed(2)}</span>
+            <span class="sep"> | </span>
 
-.sub-logo {
-    display: block;
-    font-size: 14px;
-}
+            <span class="moeda">Euro:</span> 
+            <span class="valor">R$ ${parseFloat(data.EURBRL.bid).toFixed(2)}</span>
+            <span class="sep"> | </span>
 
-/* COTAÇÕES */
-.ticker-container {
-    background: #eee;
-    padding: 8px;
-    text-align: center;
-}
+            <span class="moeda">Bitcoin:</span> 
+            <span class="valor">R$ ${parseFloat(data.BTCBRL.bid).toFixed(0)}</span>
+        `;
 
-/* COTAÇÕES - UMA LINHA */
-#cotacao-ticker {
-    white-space: nowrap;
-}
+        document.getElementById("cotacao-ticker").innerHTML = texto;
 
-/* CORES DAS COTAÇÕES */
-.moeda {
-    color: #003366;
-    font-weight: bold;
-}
-
-.valor {
-    color: #1b8f3a;
-    font-weight: bold;
-}
-
-.sep {
-    color: #555;
-    margin: 0 5px;
-}
-
-/* MENU */
-.navbar {
-    background: var(--azul);
-    padding: 10px;
-    position: sticky;
-    top: 0;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    justify-content: center;
-    gap: 15px;
-}
-
-.nav-menu a {
-    color: white;
-    text-decoration: none;
-}
-
-/* PESQUISA - ABAIXO DO MENU E À ESQUERDA */
-.search-bar-container {
-    background: white;
-    padding: 15px 5%;
-    display: flex;
-    justify-content: flex-start; /* ESQUERDA */
-}
-
-.search-box {
-    display: flex;
-    width: 100%;
-    max-width: 400px;
-}
-
-.search-box input {
-    flex: 1;
-    padding: 10px;
-}
-
-.search-box button {
-    background: var(--azul);
-    color: white;
-    border: none;
-    padding: 10px;
-}
-
-/* CLIMA */
-.weather-card {
-    background: var(--azul);
-    color: white;
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
-}
-
-/* RODAPÉ */
-footer {
-    background: var(--azul);
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-.social-icon {
-    font-size: 20px;
-    margin: 10px;
-}
-
-.fb { color: #1877F2; }
-.insta { color: #E4405F; }
-.whats { color: #25D366; }
-
-/* MOBILE */
-.menu-toggle {
-    display: none;
-    color: white;
-    font-size: 20px;
-}
-
-@media(max-width:768px){
-    .nav-menu {
-        display: none;
-        flex-direction: column;
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    .menu-toggle {
-        display: block;
+    } catch {
+        document.getElementById("cotacao-ticker").innerText = "Erro ao carregar cotações";
     }
 }
+
+carregarCotacoes();
+
+// CLIMA
+async function carregarClima() {
+    try {
+        let res = await fetch("https://wttr.in/Maringa?format=j1");
+        let data = await res.json();
+
+        document.getElementById("cidade").innerText = "Maringá - PR";
+        document.getElementById("temperatura").innerText = data.current_condition[0].temp_C + "°C";
+        document.getElementById("condicao").innerText = data.current_condition[0].weatherDesc[0].value;
+
+    } catch {
+        document.getElementById("condicao").innerText = "Erro ao carregar clima";
+    }
+}
+
+carregarClima();
