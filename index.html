@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noroeste Paranaense | Notícias de Marilena e Região</title>
+    <title>Noroeste Paranaense</title>
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
 <header>
+
     <div class="logo">
         NOROESTE
         <span class="sub-logo">PARANAENSE</span>
     </div>
 
+    <!-- COTAÇÕES (SCROLL INFINITO) -->
     <div class="ticker-container">
         <div class="ticker-wrapper">
-            <div class="ticker-content" id="cotacao-ticker">
-                <span>USD/BRL: R$ 5,10 | BTC/BRL: R$ 340.500 | Marilena/PR: Recorde Mundial batido hoje! | </span>
-            </div>
+            <div class="ticker-content" id="cotacao-ticker"></div>
         </div>
     </div>
 
+    <!-- MENU -->
     <nav class="navbar">
         <div class="menu-toggle" id="mobile-menu">
             <i class="fas fa-bars"></i>
@@ -51,6 +54,7 @@
         </ul>
     </nav>
 
+    <!-- BUSCA -->
     <div class="search-bar-container">
         <div class="search-box">
             <input type="text" id="inputPesquisa" placeholder="Pesquisar notícias...">
@@ -59,24 +63,68 @@
             </button>
         </div>
     </div>
+
 </header>
 
 <main class="container">
 
     <section class="weather-card">
-        <h2 id="cidade">Marilena, PR</h2>
-        <div id="temperatura">28°C</div>
-        <p id="condicao">Ensolarado</p>
+        <h2 id="cidade">Carregando...</h2>
+        <div id="temperatura">--°C</div>
+        <p id="condicao">...</p>
     </section>
 
-    <section class="news-feed">
-        
-        <article class="news-card highlight">
-            <div class="news-badge">EXCLUSIVO</div>
-            <div class="news-image-placeholder">
-                <i class="fas fa-motorcycle"></i>
-            </div>
-            <div class="news-body">
-                <span class="news-location">Marilena</span>
-                <h3>Homem entra para o Livro dos Recordes após acabar a gasolina da moto mais de 60 vezes no ano</h3>
-                <p>O morador local atingiu a marca histórica de 62 vezes em "pane seca". O feito
+    <!-- NOTÍCIA -->
+    <section class="noticia">
+        <h1>Morador de Marilena entra para o livro dos recordes ao deixar moto sem gasolina 60 vezes</h1>
+
+        <img src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6" 
+             alt="Motocicleta parada na estrada" 
+             style="width:100%; border-radius:10px; margin:15px 0;">
+
+        <p>
+            Um caso curioso colocou a pequena cidade de Marilena, no noroeste do Paraná, 
+            no mapa das notícias inusitadas. O morador José Francisco Neto, de 55 anos, 
+            entrou para o livro dos recordes após deixar sua motocicleta ficar sem gasolina 
+            60 vezes ao longo de um único ano.
+        </p>
+
+        <p>
+            Segundo ele, tudo começou como uma distração, mas acabou virando um desafio pessoal. 
+            Cada ocorrência foi registrada com fotos e testemunhas.
+        </p>
+
+        <p>
+            “Começou sem querer, mas depois virou quase uma meta. Eu quis ver até onde conseguia chegar”, relatou.
+        </p>
+
+        <p>
+            Especialistas alertam que a prática pode causar danos ao veículo e trazer riscos à segurança, 
+            principalmente em rodovias.
+        </p>
+
+        <p>
+            Mesmo assim, o feito ganhou repercussão nas redes sociais e colocou o nome da cidade em destaque.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Nos siga nas redes</p>
+
+    <div class="social-links">
+        <a href="#" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon insta"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/5544988329395" target="_blank" class="social-icon whats">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
