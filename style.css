@@ -10,6 +10,10 @@
 body {
     background: #f4f4f4;
     color: #333;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* HEADER */
@@ -17,6 +21,7 @@ header {
     background: #0d1b2a;
     color: #fff;
     padding: 10px;
+    width: 100%;
 }
 
 /* LOGO */
@@ -37,6 +42,7 @@ header {
     overflow: hidden;
     background: #111;
     margin-top: 10px;
+    border-radius: 6px;
 }
 
 .ticker-wrapper {
@@ -59,15 +65,15 @@ header {
 
 /* CORES DAS MOEDAS */
 #cotacao-ticker span:nth-child(1) {
-    color: #00ffcc; /* Dólar */
+    color: #00ffcc;
 }
 
 #cotacao-ticker span:nth-child(2) {
-    color: #ffd700; /* Euro */
+    color: #ffd700;
 }
 
 #cotacao-ticker span:nth-child(3) {
-    color: #ff4d4d; /* Bitcoin */
+    color: #ff4d4d;
 }
 
 /* ANIMAÇÃO TICKER */
@@ -75,6 +81,7 @@ header {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(-50%);
     }
@@ -94,6 +101,12 @@ header {
     list-style: none;
     background: #1b263b;
     padding: 10px;
+    border-radius: 8px;
+    scrollbar-width: none;
+}
+
+.nav-menu::-webkit-scrollbar {
+    display: none;
 }
 
 /* ITENS DO MENU */
@@ -106,12 +119,14 @@ header {
     text-decoration: none;
     padding: 8px 12px;
     display: inline-block;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 .nav-menu li a:hover {
     background: #415a77;
-    border-radius: 5px;
+    transform: translateY(-2px);
 }
 
 /* MENU MOBILE */
@@ -123,28 +138,33 @@ header {
 
 /* BUSCA */
 .search-bar-container {
-    margin: 10px;
+    margin: 15px 10px;
 }
 
 .search-box {
     display: flex;
-    max-width: 400px;
+    max-width: 450px;
     margin: auto;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .search-box input {
     flex: 1;
-    padding: 8px;
+    padding: 12px;
     border: none;
     outline: none;
+    font-size: 15px;
 }
 
 .search-box button {
-    padding: 8px 12px;
+    padding: 12px 16px;
     border: none;
     background: #415a77;
     color: #fff;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 .search-box button:hover {
@@ -153,46 +173,69 @@ header {
 
 /* MAIN */
 .container {
+    flex: 1;
+    width: 100%;
     padding: 20px;
 }
 
 /* WEATHER */
 .weather-card {
     background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 300px;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 320px;
     margin: auto;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.weather-card:hover {
+    transform: translateY(-5px);
 }
 
 .weather-card h2 {
     margin-bottom: 10px;
+    font-size: 24px;
 }
 
-/* FOOTER */
+#temperatura {
+    font-size: 42px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #0d1b2a;
+}
+
+#condicao {
+    color: #666;
+    font-size: 15px;
+}
+
+/* FOOTER FIXO NO FINAL */
 footer {
     background: #0d1b2a;
     color: #fff;
     text-align: center;
-    padding: 15px;
-    margin-top: 20px;
+    padding: 20px 15px;
+    margin-top: auto;
+    width: 100%;
 }
 
+/* REDES SOCIAIS */
 .social-links {
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 .social-icon {
     color: #fff;
     margin: 0 10px;
-    font-size: 18px;
-    transition: 0.3s;
+    font-size: 20px;
+    transition: 0.3s ease;
 }
 
 .social-icon:hover {
     color: #00ffcc;
+    transform: scale(1.2);
 }
 
 /* RESPONSIVIDADE */
@@ -206,39 +249,51 @@ footer {
     .nav-menu {
         flex-direction: column;
         display: none;
+        overflow-x: hidden;
     }
 
     .nav-menu.active {
         display: flex;
     }
 
+    .nav-menu li {
+        margin: 8px 0;
+    }
+
     .search-box {
         width: 100%;
     }
-    
-}/* 1. Faz o body ocupar no mínimo 100% da altura da tela do computador */
-body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
+
+    .weather-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
 }
 
-/* 2. Faz a parte branca do meio crescer e empurrar o rodapé para o rodapé real */
-.conteudo-principal {
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Mantém o card de clima centralizado */
-    padding: 20px;
-}
+/* TELAS MUITO PEQUENAS */
+@media (max-width: 480px) {
 
-/* 3. Seu rodapé (barra escura das redes sociais) */
-footer {
-    background-color: #0b1a2e; /* Tom escuro do seu print */
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    width: 100%;
-}
+    header {
+        padding: 8px;
+    }
 
+    .search-box input {
+        font-size: 14px;
+    }
+
+    .search-box button {
+        padding: 10px 14px;
+    }
+
+    #temperatura {
+        font-size: 36px;
+    }
+
+    footer {
+        padding: 18px 10px;
+    }
+}
