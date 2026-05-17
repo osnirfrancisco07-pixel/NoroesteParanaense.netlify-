@@ -1,0 +1,218 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+    background: #f4f4f4;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: #0d1b2a;
+    color: #fff;
+    padding: 10px;
+}
+
+/* LOGO */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sub-logo {
+    display: block;
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* TICKER */
+.ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background: #111;
+    margin-top: 10px;
+}
+
+.ticker-wrapper {
+    display: flex;
+    width: max-content;
+    animation: scrollTicker 20s linear infinite;
+}
+
+.ticker-content {
+    display: flex;
+    gap: 40px;
+    padding-right: 40px;
+}
+
+.ticker-content span {
+    white-space: nowrap;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* CORES DAS MOEDAS */
+#cotacao-ticker span:nth-child(1) {
+    color: #00ffcc; /* Dólar */
+}
+
+#cotacao-ticker span:nth-child(2) {
+    color: #ffd700; /* Euro */
+}
+
+#cotacao-ticker span:nth-child(3) {
+    color: #ff4d4d; /* Bitcoin */
+}
+
+/* ANIMAÇÃO TICKER */
+@keyframes scrollTicker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* MENU */
+.navbar {
+    margin-top: 10px;
+}
+
+/* MENU HORIZONTAL */
+.nav-menu {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    list-style: none;
+    background: #1b263b;
+    padding: 10px;
+}
+
+/* ITENS DO MENU */
+.nav-menu li {
+    margin-right: 15px;
+}
+
+.nav-menu li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.nav-menu li a:hover {
+    background: #415a77;
+    border-radius: 5px;
+}
+
+/* MENU MOBILE */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* BUSCA */
+.search-bar-container {
+    margin: 10px;
+}
+
+.search-box {
+    display: flex;
+    max-width: 400px;
+    margin: auto;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    outline: none;
+}
+
+.search-box button {
+    padding: 8px 12px;
+    border: none;
+    background: #415a77;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #1b263b;
+}
+
+/* MAIN */
+.container {
+    padding: 20px;
+}
+
+/* WEATHER */
+.weather-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.weather-card h2 {
+    margin-bottom: 10px;
+}
+
+/* FOOTER */
+footer {
+    background: #0d1b2a;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
+.social-icon {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    color: #00ffcc;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        display: none;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+}
