@@ -215,4 +215,30 @@ footer {
     .search-box {
         width: 100%;
     }
+    
+}/* 1. Faz o body ocupar no mínimo 100% da altura da tela do computador */
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
 }
+
+/* 2. Faz a parte branca do meio crescer e empurrar o rodapé para o rodapé real */
+.conteudo-principal {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Mantém o card de clima centralizado */
+    padding: 20px;
+}
+
+/* 3. Seu rodapé (barra escura das redes sociais) */
+footer {
+    background-color: #0b1a2e; /* Tom escuro do seu print */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+}
+
