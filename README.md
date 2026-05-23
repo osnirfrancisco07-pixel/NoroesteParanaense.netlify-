@@ -1,4 +1,4 @@
-# 🌐 OmniNews Pro 2026
+# 🌐 portal noroeste paranaense
 > Portal de Notícias Full-Stack com Automação por IA.
 
 ## 🚀 Como Rodar o Projeto
